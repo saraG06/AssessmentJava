@@ -17,6 +17,9 @@ public class Docente {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "docente")
     List<Modulo> moduloList;
 
+    public Docente() {
+    }
+
     public Long getId() {
         return id;
     }

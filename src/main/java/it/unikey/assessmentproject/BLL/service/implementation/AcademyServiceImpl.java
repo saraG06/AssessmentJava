@@ -3,6 +3,8 @@ package it.unikey.assessmentproject.BLL.service.implementation;
 import it.unikey.assessmentproject.BLL.DTO.request.AcademyRequestDTO;
 import it.unikey.assessmentproject.BLL.DTO.request.ModuloRequestDTO;
 import it.unikey.assessmentproject.BLL.DTO.response.AcademyResponseDTO;
+import it.unikey.assessmentproject.BLL.DTO.response.DiscenteResponseDTO;
+import it.unikey.assessmentproject.BLL.DTO.response.ModuloResponseDTO;
 import it.unikey.assessmentproject.BLL.mapper.implementation.*;
 import it.unikey.assessmentproject.BLL.service.Exception.EntityNotFoundException;
 import it.unikey.assessmentproject.BLL.service.abstraction.AcademyService;
@@ -14,6 +16,7 @@ import it.unikey.assessmentproject.DAL.repository.AcademyRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -64,6 +67,21 @@ public class AcademyServiceImpl implements AcademyService {
     @Override
     public List<AcademyResponseDTO> getAcademyByModuloListContainingModulo(ModuloRequestDTO moduloRequestDTO) {
         return academyResponseMapper.asDTOList(academyRepository.getAcademyByModuloListContainingModulo(moduloRequestMapper.asEntity(moduloRequestDTO)));
+    }
+
+    @Override
+    public List<AcademyResponseDTO> getAcademyByInizio(LocalDate inizio) {
+        return academyResponseMapper.asDTOList(academyRepository.getAcademyByDataInizio(inizio));
+    }
+
+    @Override
+    public List<AcademyResponseDTO> getAcademyByFine(LocalDate fine) {
+        return academyResponseMapper.asDTOList(academyRepository.getAcademyByDataFine(fine));
+    }
+
+    @Override
+    public AcademyResponseDTO getAcademyInfo(Long id) {
+        return academyResponseMapper.asDTO(academyRepository.getAcademyInfo(id));
     }
 
 

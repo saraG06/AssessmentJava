@@ -18,6 +18,9 @@ public class Discente {
     @ManyToOne(fetch = FetchType.LAZY,cascade = {CascadeType.MERGE,CascadeType.PERSIST})
     private Academy academy;
 
+    public Discente() {
+    }
+
     public Long getId() {
         return id;
     }

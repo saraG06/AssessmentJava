@@ -1,7 +1,5 @@
 package it.unikey.assessmentproject.DAL.entity;
 
-import org.hibernate.annotations.Fetch;
-
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
@@ -23,6 +21,9 @@ public class Academy {
     private List<Discente> discenteList;
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "academy")
     private List<Modulo> moduloList;
+
+    public Academy() {
+    }
 
     public Long getId() {
         return id;

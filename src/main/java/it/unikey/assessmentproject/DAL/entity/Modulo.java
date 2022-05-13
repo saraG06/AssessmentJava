@@ -25,6 +25,9 @@ public class Modulo {
     @JoinColumn(name = "academy_id")
     private Academy academy;
 
+    public Modulo() {
+    }
+
     public Long getId() {
         return id;
     }
