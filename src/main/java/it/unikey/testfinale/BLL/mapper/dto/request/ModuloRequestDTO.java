@@ -10,7 +10,7 @@ public class ModuloRequestDTO {
 
     private String nome;
     private String argomenti;
-    private Docente docente;
+    private DocenteRequestDTO docenteRequestDTO;
     private LocalDate inizio;
     private LocalDate fine;
     private AcademyRequestDTO academyRequestDTO;

@@ -14,6 +14,6 @@ public class AcademyResponseDTO {
     private String nome;
     private LocalDate dataInizio;
     private LocalDate dataFine;
-    private List<ModuloRequestDTO> moduloRequestDTOList;
-    private List<DiscenteRequestDTO> discenteRequestDTOList;
+    private List<ModuloResponseDTO> moduloResponseDTOList;
+    private List<DiscenteResponseDTO> discenteResponseDTOList;
 }

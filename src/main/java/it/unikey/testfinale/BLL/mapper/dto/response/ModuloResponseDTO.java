@@ -11,7 +11,7 @@ public class ModuloResponseDTO {
     private Long id;
     private String nome;
     private String argomenti;
-    private Docente docente;
+    private DocenteResponseDTO docenteResponseDTO;
     private LocalDate inizio;
     private LocalDate fine;
     private AcademyResponseDTO academyResponseDTO;
