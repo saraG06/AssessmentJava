@@ -12,6 +12,7 @@ import it.unikey.assesmentfedericodc.DAL.repository.ModuloRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 @Service
@@ -36,14 +37,19 @@ public class ModuloServiceImpl implements ModuloService {
     @Override
     public ModuloResponseDTO findById(Long id) {
         Modulo m = moduloRepository.findById(id).get();
-        ModuloResponseDTO mr = moduloResponseMapper.asDTO(m);
-    //    mr.setAcademyResponseDTO(academyResponseMapper.asDTO(m.getAcademy()));
-        return mr;
+        if(m!= null){
+            ModuloResponseDTO mr = moduloResponseMapper.asDTO(m);
+            //    mr.setAcademyResponseDTO(academyResponseMapper.asDTO(m.getAcademy()));
+            return mr;
+        }
+        else throw new EntityNotFoundException();
     }
 
     @Override
     public void deleteModuloById(Long id) {
-        moduloRepository.deleteById(id);
+        if(moduloRepository.existsById(id))
+            moduloRepository.deleteById(id);
+        else throw new EntityNotFoundException();
     }
 
     @Override

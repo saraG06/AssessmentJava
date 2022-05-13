@@ -17,15 +17,15 @@ public class Academy {
     @ApiModelProperty(notes= "ID academy", example= "1", required = true)
     private Long id ;
 
-    @Column(name = "nome")
+    @Column(name = "nome" ,nullable = false)
     @ApiModelProperty(notes= "nome academy", example= "JavaMarzo2022", required = true)
     private String nome;
 
-    @Column(name = "dataInizio")
+    @Column(name = "dataInizio",nullable = false)
     @ApiModelProperty(notes= "data inizio academy", example= "2022-03-20", required = true)
     private LocalDate dataInizio;
 
-    @Column(name = "dataFine")
+    @Column(name = "dataFine",nullable = false)
     @ApiModelProperty(notes= "data fine academy", example= "2022-08-22", required = true)
     private LocalDate dataFine;
 

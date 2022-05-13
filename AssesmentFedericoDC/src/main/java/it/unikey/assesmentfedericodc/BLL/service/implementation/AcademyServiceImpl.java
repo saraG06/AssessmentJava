@@ -13,6 +13,7 @@ import it.unikey.assesmentfedericodc.DAL.repository.AcademyRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -52,15 +53,20 @@ public class AcademyServiceImpl implements AcademyService {
     @Override
     public AcademyResponseDTO findById(Long id) {
         Academy a = academyRepository.findById(id).get();
-        AcademyResponseDTO ar = academyResponseMapper.asDTO(a);
-        ar.setDiscenteResponseDTOList(discenteResponseMapper.asDTOList(a.getDiscenti()));
-        ar.setModuloResponseDTOList(moduloResponseMapper.asDTOList(a.getModuli()));
-        return ar ;
+        if(a != null){
+            AcademyResponseDTO ar = academyResponseMapper.asDTO(a);
+            ar.setDiscenteResponseDTOList(discenteResponseMapper.asDTOList(a.getDiscenti()));
+            ar.setModuloResponseDTOList(moduloResponseMapper.asDTOList(a.getModuli()));
+            return ar ;
+        }else throw new EntityNotFoundException();
+
     }
 
     @Override
     public void deleteAcademyById(Long id) {
-        academyRepository.deleteById(id);
+        if(academyRepository.existsById(id))
+            academyRepository.deleteById(id);
+        else throw new EntityNotFoundException();
     }
 
     @Override
@@ -93,6 +99,8 @@ public class AcademyServiceImpl implements AcademyService {
         return responseDTOListConverter(academyRepository.findByDataCompresa(dataMin,dataMax));
     }
 
+    //questo metodo mi serve per convertire una lista academy in una di responsedto
+    //la uso in tutti i metodi in cui devo tornare una lista di responsedto
     private List<AcademyResponseDTO> responseDTOListConverter(List<Academy> cList){
         List<AcademyResponseDTO> arList =  new ArrayList<>();
         for(Academy a : cList){

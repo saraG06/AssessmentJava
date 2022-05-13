@@ -15,13 +15,13 @@ public class Discente {
     @ApiModelProperty(notes= "ID discente", example= "1", required = true)
     private Long id ;
 
-    @Column(name = "nome")
+    @Column(name = "nome",nullable = false)
     @ApiModelProperty(notes= "nome discente", example= "Mario", required = true)
     private String nome;
-    @Column(name = "cognome")
+    @Column(name = "cognome",nullable = false)
     @ApiModelProperty(notes= "cognome discente", example= "Rossi", required = true)
     private String cognome;
-    @Column(name = "codiceFiscale" , length=16)
+    @Column(name = "codiceFiscale" , length=16,nullable = false)
     @ApiModelProperty(notes= "CF discente", example= "DFRESV86H13Y603P" , required = true)
     private String codiceFiscale;
     @ManyToOne(cascade= CascadeType.ALL)

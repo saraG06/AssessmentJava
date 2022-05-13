@@ -12,6 +12,7 @@ import it.unikey.assesmentfedericodc.DAL.repository.DiscenteRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,14 +36,20 @@ public class DiscenteServiceImpl implements DiscenteService {
     @Override
     public DiscenteResponseDTO findById(Long id) {
         Discente d = discenteRepository.findById(id).get();
-        DiscenteResponseDTO dr = discenteResponseMapper.asDTO(d);
-     //   dr.setAcademyResponseDTO(academyResponseMapper.asDTO(d.getAcademy()));
-        return dr;
+        if(d != null){
+            DiscenteResponseDTO dr = discenteResponseMapper.asDTO(d);
+            //   dr.setAcademyResponseDTO(academyResponseMapper.asDTO(d.getAcademy()));
+            return dr;
+        }else throw new EntityNotFoundException();
+
     }
 
     @Override
     public void deleteDiscenteById(Long id) {
-        discenteRepository.deleteById(id);
+        if(discenteRepository.existsById(id))
+            discenteRepository.deleteById(id);
+        else throw new EntityNotFoundException();
+
     }
 
     @Override
