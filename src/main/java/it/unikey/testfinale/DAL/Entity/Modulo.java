@@ -33,7 +33,7 @@ public class Modulo {
     @ApiModelProperty(notes= "Data inizio modulo", example= "2021-03-21", required = true)
     private LocalDate inizio;
 
-    @Column(name= "argomenti", nullable = false)
+    @Column(name= "fine", nullable = false)
     @ApiModelProperty(notes= "Data fine modulo", example= "2021-04-21", required = true)
     private LocalDate fine;
 

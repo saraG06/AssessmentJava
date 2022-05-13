@@ -15,7 +15,7 @@ public class Discente {
     @ApiModelProperty(notes= "ID discente", example= "1", required = true)
     private Long id;
 
-    @Column(name= "CF", nullable = false)
+    @Column(name= "CF", nullable = false, unique = true)
     @ApiModelProperty(notes= "Codice fiscale docente", example= "MRIRSS02A05K501H", required = true)
     private String CF;
 

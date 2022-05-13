@@ -1,5 +1,7 @@
 package it.unikey.testfinale.BLL.service.impl;
 
+import it.unikey.testfinale.BLL.Exception.AlreadyExistsException;
+import it.unikey.testfinale.BLL.Exception.ConflictBetweenAttributesException;
 import it.unikey.testfinale.BLL.mapper.dto.request.AcademyRequestDTO;
 import it.unikey.testfinale.BLL.mapper.dto.request.ModuloRequestDTO;
 import it.unikey.testfinale.BLL.mapper.dto.response.AcademyResponseDTO;
@@ -11,15 +13,16 @@ import it.unikey.testfinale.BLL.mapper.implementation.response.DiscenteResponseM
 import it.unikey.testfinale.BLL.mapper.implementation.response.ModuloResponseMapper;
 import it.unikey.testfinale.BLL.service.abstraction.AcademyService;
 import it.unikey.testfinale.DAL.Entity.Academy;
-import it.unikey.testfinale.DAL.Entity.Discente;
-import it.unikey.testfinale.DAL.Entity.Modulo;
 import it.unikey.testfinale.DAL.Repository.AcademyRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-
+@Service
+@RequiredArgsConstructor
 public class AcademyServiceImpl implements AcademyService {
 
     private AcademyRepository academyRepository;
@@ -31,11 +34,17 @@ public class AcademyServiceImpl implements AcademyService {
     private DiscenteResponseMapper discenteResponseMapper;
 
     @Override
-    public void saveAcademy(AcademyRequestDTO academyRequestDTO) {
-        Academy a= academyRequestMapper.asEntity(academyRequestDTO);
-        a.setModuloList(moduloRequestMapper.asEntityList(academyRequestDTO.getModuloRequestDTOList()));
-        a.setDiscenteList(discenteRequestMapper.asEntityList(academyRequestDTO.getDiscenteRequestDTOList()));
-        academyRepository.save(a);
+    public void saveAcademy(AcademyRequestDTO academyRequestDTO) throws ConflictBetweenAttributesException, AlreadyExistsException {
+        if(academyRequestDTO.getDataInizio().isBefore(academyRequestDTO.getDataFine())) {       //la data di inizio deve essere prima della data di fine
+            Academy a = academyRequestMapper.asEntity(academyRequestDTO);
+            if(!academyRepository.findAll().contains(a)){       //non deve essere già presente
+                a.setModuloList(moduloRequestMapper.asEntityList(academyRequestDTO.getModuloRequestDTOList()));
+                a.setDiscenteList(discenteRequestMapper.asEntityList(academyRequestDTO.getDiscenteRequestDTOList()));
+                academyRepository.save(a);
+            } else
+                throw new AlreadyExistsException();
+        } else
+            throw new ConflictBetweenAttributesException();
     }
 
     @Override
@@ -100,8 +109,8 @@ public class AcademyServiceImpl implements AcademyService {
     }
 
     @Override
-    public List<AcademyResponseDTO> findDetails() {
-        List<Academy> announcementList= academyRepository.findDetails();
+    public List<AcademyResponseDTO> findDetails(Long id) {
+        List<Academy> announcementList= academyRepository.findDetails(id);
         List<AcademyResponseDTO> academyRList= new ArrayList<>();
         for(Academy a : announcementList){
             AcademyResponseDTO aResDTO = academyResponseMapper.asDTO(a);

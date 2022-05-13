@@ -1,22 +1,23 @@
 package it.unikey.testfinale.BLL.service.impl;
 
+import it.unikey.testfinale.BLL.Exception.AlreadyExistsException;
 import it.unikey.testfinale.BLL.mapper.dto.request.DocenteRequestDTO;
-import it.unikey.testfinale.BLL.mapper.dto.response.DiscenteResponseDTO;
 import it.unikey.testfinale.BLL.mapper.dto.response.DocenteResponseDTO;
 import it.unikey.testfinale.BLL.mapper.implementation.request.DocenteRequestMapper;
 import it.unikey.testfinale.BLL.mapper.implementation.request.ModuloRequestMapper;
 import it.unikey.testfinale.BLL.mapper.implementation.response.DocenteResponseMapper;
 import it.unikey.testfinale.BLL.mapper.implementation.response.ModuloResponseMapper;
 import it.unikey.testfinale.BLL.service.abstraction.DocenteService;
-import it.unikey.testfinale.DAL.Entity.Discente;
 import it.unikey.testfinale.DAL.Entity.Docente;
-import it.unikey.testfinale.DAL.Entity.Modulo;
 import it.unikey.testfinale.DAL.Repository.DocenteRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
-
+@Service
+@RequiredArgsConstructor
 public class DocenteServiceImpl implements DocenteService {
 
     private DocenteRepository docenteRepository;
@@ -27,10 +28,13 @@ public class DocenteServiceImpl implements DocenteService {
 
 
     @Override
-    public void saveDocente(DocenteRequestDTO docenteRequestDTO) {
+    public void saveDocente(DocenteRequestDTO docenteRequestDTO) throws AlreadyExistsException {
         Docente d= docenteRequestMapper.asEntity(docenteRequestDTO);
-        d.setModuloList(moduloRequestMapper.asEntityList(docenteRequestDTO.getModuloRequestDTOList()));
-        docenteRepository.save(d);
+        if(!docenteRepository.findAll().contains(d)) {
+            d.setModuloList(moduloRequestMapper.asEntityList(docenteRequestDTO.getModuloRequestDTOList()));
+            docenteRepository.save(d);
+        } else
+            throw new AlreadyExistsException();
     }
 
     @Override

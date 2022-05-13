@@ -1,6 +1,5 @@
 package it.unikey.testfinale.BLL.mapper.dto.request;
 
-import it.unikey.testfinale.DAL.Entity.Docente;
 import lombok.Data;
 
 import java.time.LocalDate;

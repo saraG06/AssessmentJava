@@ -17,8 +17,8 @@ public class Academy {
     @ApiModelProperty(notes= "ID academy", example= "1", required = true)
     private Long id;
 
-    @Column(name= "nome", nullable = false)
-    @ApiModelProperty(notes= "Nome academy", example= "Java_2022.3", required = true)
+    @Column(name= "nome", nullable = false, unique = true)
+    @ApiModelProperty(notes= "Nome academy", example= "Java_2022.3", required= true)
     private String nome;
 
     @Column(name= "dataInizio", nullable = false)

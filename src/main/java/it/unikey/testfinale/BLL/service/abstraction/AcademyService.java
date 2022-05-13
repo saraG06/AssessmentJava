@@ -1,5 +1,7 @@
 package it.unikey.testfinale.BLL.service.abstraction;
 
+import it.unikey.testfinale.BLL.Exception.AlreadyExistsException;
+import it.unikey.testfinale.BLL.Exception.ConflictBetweenAttributesException;
 import it.unikey.testfinale.BLL.mapper.dto.request.AcademyRequestDTO;
 import it.unikey.testfinale.BLL.mapper.dto.request.ModuloRequestDTO;
 import it.unikey.testfinale.BLL.mapper.dto.response.AcademyResponseDTO;
@@ -9,7 +11,7 @@ import java.util.List;
 
 public interface AcademyService {
 
-    void saveAcademy(AcademyRequestDTO academyRequestDTO);
+    void saveAcademy(AcademyRequestDTO academyRequestDTO) throws ConflictBetweenAttributesException, AlreadyExistsException;
 
     AcademyResponseDTO findById(Long id);
 
@@ -21,7 +23,7 @@ public interface AcademyService {
 
     List<AcademyResponseDTO> findByModulo(ModuloRequestDTO moduloRequestDTO);
 
-    List<AcademyResponseDTO> findDetails();
+    List<AcademyResponseDTO> findDetails(Long id);
 
     List<AcademyResponseDTO> findByDataInizio(LocalDate dataInizio);
 

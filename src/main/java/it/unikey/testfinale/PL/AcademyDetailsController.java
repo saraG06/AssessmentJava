@@ -8,10 +8,7 @@ import it.unikey.testfinale.BLL.service.abstraction.AcademyService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,13 +20,13 @@ public class AcademyDetailsController {
 
     private AcademyService academyService;
 
-    @GetMapping()
+    @GetMapping(path="/{id}")
     @ApiOperation(value= "Metodo per cercare i dettagli delle academy")
     @ApiResponses(value= {
             @ApiResponse(code= 200, message= "richiesta ricevuta ed eseguita"),
             @ApiResponse(code= 404, message= "risorsa non trovata")
     })
-    public ResponseEntity<List<AcademyResponseDTO>> getDetails(){
-        return new ResponseEntity<>(academyService.findDetails(), HttpStatus.OK);
+    public ResponseEntity<List<AcademyResponseDTO>> getDetails(@PathVariable Long id){
+        return new ResponseEntity<>(academyService.findDetails(id), HttpStatus.OK);
     }
 }

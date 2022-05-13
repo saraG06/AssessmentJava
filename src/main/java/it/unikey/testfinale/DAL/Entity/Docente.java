@@ -24,7 +24,7 @@ public class Docente {
     @ApiModelProperty(notes= "Cognome docente", example= "Rossi", required = true)
     private String cognome;
 
-    @Column(name= "email", nullable = false)
+    @Column(name= "email", nullable = false, unique = true)
     @ApiModelProperty(notes= "Email docente", example= "mariorossi@gmail.com", required = true)
     private String email;
 
