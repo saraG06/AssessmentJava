@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Repository
@@ -25,4 +26,7 @@ public interface AcademyRepository extends JpaRepository<Academy,Long> {
             "JOIN Discenti di ON di.academy.id_academy = a.id_academy " +
             "WHERE a.id_academy = :id")
     Academy Dettagliacademy(Long id);
+
+    @Query(value = "SELECT a FROM Academy a WHERE a.data_inizio >= :datainizio")
+    List<Academy> getAcademyByDataInizio(@Param("datainizio") LocalDate inizio);
 }

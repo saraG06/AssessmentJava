@@ -13,6 +13,7 @@ import it.unikey.assessmentjava.DAL.Repository.AcademyRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -53,16 +54,21 @@ public class AcademyServiceImplementazioni implements AcademyService {
 
     @Override
     public List<AcademyResponseDTO> findByNome(String nome) {
-        return findByNome(nome);
+        return academyResponseMapper.asDTOList(academyRepository.findByNome(nome));
     }
 
     @Override
     public List<AcademyResponseDTO> findByModulo(String nomeModulo) {
-        return findByModulo(nomeModulo);
+        return academyResponseMapper.asDTOList(academyRepository.findByModulo(nomeModulo));
     }
 
     @Override
     public List<AcademyResponseDTO> Dettagliacademy(Long id) {
-        return Dettagliacademy(id);
+        return academyResponseMapper.asDTOList((List<Academy>) academyRepository.Dettagliacademy(id));
+    }
+
+    @Override
+    public List<AcademyResponseDTO> getAcademyByDataInizio(LocalDate datainizio) {
+        return academyResponseMapper.asDTOList(academyRepository.getAcademyByDataInizio(datainizio));
     }
 }
