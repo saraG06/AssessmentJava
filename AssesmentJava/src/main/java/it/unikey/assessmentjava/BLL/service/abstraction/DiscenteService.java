@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface DiscenteService {
 
-    void saveDiscente(DiscenteRequestDTO discenteRequestDTO);
+    void saveDiscente(DiscenteRequestDTO discenteRequestDTO) throws NoSuchFieldException;
 
     List<DiscenteResponseDTO> findAllDiscente();
 

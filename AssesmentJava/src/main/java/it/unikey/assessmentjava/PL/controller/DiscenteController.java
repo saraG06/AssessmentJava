@@ -27,7 +27,11 @@ public class DiscenteController {
             @ApiResponse(code = 201, message = "Created the discente"),
             @ApiResponse(code = 403, message = "No authorization to reach discente")})
     public ResponseEntity<Void> save(@RequestBody DiscenteRequestDTO discenteRequestDTO){
-        discenteService.saveDiscente(discenteRequestDTO);
+        try {
+            discenteService.saveDiscente(discenteRequestDTO);
+        } catch (NoSuchFieldException e) {
+            throw new RuntimeException(e);
+        }
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 

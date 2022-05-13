@@ -7,9 +7,7 @@ import it.unikey.assessmentjava.BLL.mapper.implementation.AcademyResponseMapper;
 import it.unikey.assessmentjava.BLL.mapper.implementation.DiscenteRequestMapper;
 import it.unikey.assessmentjava.BLL.service.abstraction.AcademyService;
 import it.unikey.assessmentjava.DAL.entity.Academy;
-import it.unikey.assessmentjava.DAL.entity.Discente;
 import it.unikey.assessmentjava.DAL.repository.AcademyRepository;
-import it.unikey.assessmentjava.DAL.repository.DiscenteRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

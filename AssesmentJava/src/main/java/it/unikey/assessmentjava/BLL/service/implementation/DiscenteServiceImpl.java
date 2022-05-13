@@ -22,9 +22,13 @@ public class DiscenteServiceImpl implements DiscenteService {
     private final DiscenteResponseMapper discenteResponseMapper;
 
     @Override
-    public void saveDiscente(DiscenteRequestDTO discenteRequestDTO) {
-        Discente d = discenteRequestMapper.asEntity(discenteRequestDTO);
-        discenteRepository.save(d);
+    public void saveDiscente(DiscenteRequestDTO discenteRequestDTO) throws NoSuchFieldException {
+        if(discenteRequestDTO.getCodiceFiscale().length() != 16){
+            Discente d = discenteRequestMapper.asEntity(discenteRequestDTO);
+            discenteRepository.save(d);
+        }else
+            throw new NoSuchFieldException();
+
     }
 
     @Override
