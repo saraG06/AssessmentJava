@@ -13,6 +13,7 @@ import it.unikey.assesmentfedericodc.DAL.repository.AcademyRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 @Service
@@ -75,6 +76,21 @@ public class AcademyServiceImpl implements AcademyService {
     @Override
     public List<AcademyResponseDTO> findByModulo(String nomeModulo) {
         return responseDTOListConverter(academyRepository.findByModulo(nomeModulo));
+    }
+
+    @Override
+    public List<AcademyResponseDTO> findByDataIniziaDopo(LocalDate data) {
+        return responseDTOListConverter(academyRepository.findByDataIniziaDopo(data));
+    }
+
+    @Override
+    public List<AcademyResponseDTO> findByDataFiniscePrima(LocalDate data) {
+        return responseDTOListConverter(academyRepository.findByDataFiniscePrima(data));
+    }
+
+    @Override
+    public List<AcademyResponseDTO> findByDataCompresa(LocalDate dataMin, LocalDate dataMax) {
+        return responseDTOListConverter(academyRepository.findByDataCompresa(dataMin,dataMax));
     }
 
     private List<AcademyResponseDTO> responseDTOListConverter(List<Academy> cList){

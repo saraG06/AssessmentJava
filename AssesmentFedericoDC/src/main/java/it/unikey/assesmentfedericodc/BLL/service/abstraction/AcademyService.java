@@ -3,6 +3,7 @@ package it.unikey.assesmentfedericodc.BLL.service.abstraction;
 import it.unikey.assesmentfedericodc.BLL.dto.request.AcademyRequestDTO;
 import it.unikey.assesmentfedericodc.BLL.dto.response.AcademyResponseDTO;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public interface AcademyService {
@@ -14,4 +15,9 @@ public interface AcademyService {
 
     List<AcademyResponseDTO> findByNome(String nome);
     List<AcademyResponseDTO> findByModulo(String nomeModulo) ;
+
+    List<AcademyResponseDTO> findByDataIniziaDopo(LocalDate data);
+    List<AcademyResponseDTO> findByDataFiniscePrima(LocalDate data);
+
+    List<AcademyResponseDTO> findByDataCompresa(LocalDate dataMin, LocalDate dataMax);
 }
