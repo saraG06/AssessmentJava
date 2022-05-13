@@ -4,6 +4,7 @@ import it.unikey.BLL.dto.request.AcademyRequestDTO;
 import it.unikey.BLL.dto.request.DiscenteRequestDTO;
 import it.unikey.BLL.dto.request.ModuloRequestDTO;
 import it.unikey.BLL.dto.response.AcademyResponseDTO;
+import it.unikey.BLL.exception.DateNotValidException;
 import it.unikey.BLL.exception.IdNotFoundException;
 import it.unikey.BLL.exception.NameNotFoundException;
 import it.unikey.BLL.mapper.implementation.request.AcademyRequestMapper;
@@ -20,6 +21,7 @@ import it.unikey.DAL.repository.AcademyRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -91,6 +93,32 @@ public class AcademyServiceImpl implements AcademyService {
         }
         else
             throw new NameNotFoundException("Il nome " + nome + " non è presente nel db");
+    }
+    @Override
+    public List<AcademyResponseDTO> findByDataDopo(LocalDate data) throws DateNotValidException {
+        if(academyRepository.findByDataDopo(data) != null){
+            return academyResponseMapper.asDTOList(academyRepository.findByDataDopo(data));
+        }
+      else
+          throw new DateNotValidException("La data " + data.toString() + " non è valida");
+    }
+
+    @Override
+    public List<AcademyResponseDTO> findByDataPrima(LocalDate data) throws DateNotValidException {
+        if(academyRepository.findByDataPrima(data) != null){
+            return academyResponseMapper.asDTOList(academyRepository.findByDataPrima(data));
+        }
+        else
+            throw new DateNotValidException("La data " + data.toString() + " non è valida");
+    }
+
+    @Override
+    public List<AcademyResponseDTO> findByDataCompresa(LocalDate data1, LocalDate data2) throws DateNotValidException {
+        if(academyRepository.findByDataCompresa(data1, data2) != null){
+            return academyResponseMapper.asDTOList(academyRepository.findByDataCompresa(data1, data2));
+        }
+        else
+            throw new DateNotValidException("Le date " + data1.toString() + " " + data2.toString()  +" non sono valide");
     }
     @Override
     public List<AcademyResponseDTO> findByModulo(String modulo) throws NameNotFoundException{
