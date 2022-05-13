@@ -50,6 +50,16 @@ public class AcademyServiceImpl implements AcademyService {
         return responseDTOListConverter(academyRepository.findAll());
     }
 
+    @Override
+    public List<AcademyResponseDTO> findByNome(String nome) {
+        return responseDTOListConverter(academyRepository.findByNome(nome));
+    }
+
+    @Override
+    public List<AcademyResponseDTO> findByModulo(String nomeModulo) {
+        return responseDTOListConverter(academyRepository.findByModulo(nomeModulo));
+    }
+
     private List<AcademyResponseDTO> responseDTOListConverter(List<Academy> cList){
         List<AcademyResponseDTO> arList =  new ArrayList<>();
         for(Academy a : cList){
