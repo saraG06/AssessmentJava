@@ -4,7 +4,6 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.List;
 
 @Data
 @Table(name = "modulo")
@@ -23,6 +22,6 @@ public class Modulo {
     @Column(name = "dataFine")
     private LocalDate dataFine;
     @ManyToOne(cascade= CascadeType.ALL)
-    @JoinColumn(name="accademy_id" )
-    private Accademy accademy;
+    @JoinColumn(name="academy_id" )
+    private Academy academy;
 }

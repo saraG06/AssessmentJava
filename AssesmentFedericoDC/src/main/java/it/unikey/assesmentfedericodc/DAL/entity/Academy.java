@@ -8,9 +8,9 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Data
-@Table(name = "accademy")
+@Table(name = "academy")
 @Entity
-public class Accademy {
+public class Academy {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,10 +22,10 @@ public class Accademy {
     private LocalDate dataInizio;
     @Column(name = "dataFine")
     private LocalDate dataFine;
-    @OneToMany(mappedBy = "accademy", cascade=CascadeType.ALL)
+    @OneToMany(mappedBy = "academy", cascade=CascadeType.ALL)
     @ApiModelProperty(notes = "relazione OneToMany con lista Moduli")
     private List<Modulo>  moduli;
-    @OneToMany(mappedBy = "accademy", cascade=CascadeType.ALL)
+    @OneToMany(mappedBy = "academy", cascade=CascadeType.ALL)
     @ApiModelProperty(notes = "relazione OneToMany con lista Discenti")
     private List<Discente> discenti;
 }

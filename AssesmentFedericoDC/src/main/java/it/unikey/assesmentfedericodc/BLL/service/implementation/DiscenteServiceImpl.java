@@ -2,8 +2,8 @@ package it.unikey.assesmentfedericodc.BLL.service.implementation;
 
 import it.unikey.assesmentfedericodc.BLL.dto.request.DiscenteRequestDTO;
 import it.unikey.assesmentfedericodc.BLL.dto.response.DiscenteResponseDTO;
-import it.unikey.assesmentfedericodc.BLL.mapper.implementation.AccademyRequestMapper;
-import it.unikey.assesmentfedericodc.BLL.mapper.implementation.AccademyResponseMapper;
+import it.unikey.assesmentfedericodc.BLL.mapper.implementation.AcademyRequestMapper;
+import it.unikey.assesmentfedericodc.BLL.mapper.implementation.AcademyResponseMapper;
 import it.unikey.assesmentfedericodc.BLL.mapper.implementation.DiscenteRequestMapper;
 import it.unikey.assesmentfedericodc.BLL.mapper.implementation.DiscenteResponseMapper;
 import it.unikey.assesmentfedericodc.BLL.service.abstraction.DiscenteService;
@@ -22,13 +22,13 @@ public class DiscenteServiceImpl implements DiscenteService {
     private final DiscenteRepository discenteRepository;
     private final DiscenteRequestMapper discenteRequestMapper;
     private final DiscenteResponseMapper discenteResponseMapper;
-    private  final AccademyResponseMapper accademyResponseMapper;
-    private final AccademyRequestMapper accademyRequestMapper;
+    private  final AcademyResponseMapper academyResponseMapper;
+    private final AcademyRequestMapper academyRequestMapper;
 
     @Override
     public void saveDiscente(DiscenteRequestDTO discenteRequestDTO) {
         Discente d = discenteRequestMapper.asEntity(discenteRequestDTO);
-        d.setAccademy(accademyRequestMapper.asEntity(discenteRequestDTO.getAccademyRequestDTO()));
+        d.setAcademy(academyRequestMapper.asEntity(discenteRequestDTO.getAcademyRequestDTO()));
         discenteRepository.save(d);
     }
 
@@ -36,7 +36,7 @@ public class DiscenteServiceImpl implements DiscenteService {
     public DiscenteResponseDTO findById(Long id) {
         Discente d = discenteRepository.findById(id).get();
         DiscenteResponseDTO dr = discenteResponseMapper.asDTO(d);
-        dr.setAccademyResponseDTO(accademyResponseMapper.asDTO(d.getAccademy()));
+        dr.setAcademyResponseDTO(academyResponseMapper.asDTO(d.getAcademy()));
         return dr;
     }
 
@@ -51,7 +51,7 @@ public class DiscenteServiceImpl implements DiscenteService {
         List<DiscenteResponseDTO> drList =  new ArrayList<>();
         for(Discente d : dList){
             DiscenteResponseDTO dr = discenteResponseMapper.asDTO(d);
-            dr.setAccademyResponseDTO(accademyResponseMapper.asDTO(d.getAccademy()));
+            dr.setAcademyResponseDTO(academyResponseMapper.asDTO(d.getAcademy()));
             drList.add(dr);
         }
         return drList;

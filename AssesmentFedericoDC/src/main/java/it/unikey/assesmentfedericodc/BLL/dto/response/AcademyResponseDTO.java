@@ -7,7 +7,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Data
-public class AccademyResponseDTO implements Serializable {
+public class AcademyResponseDTO implements Serializable {
 
     private String nome;
     private LocalDate dataInizio;

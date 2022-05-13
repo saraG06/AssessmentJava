@@ -10,5 +10,5 @@ public class DiscenteResponseDTO implements Serializable {
     private String cognome;
     private String codiceFiscale;
 
-    private AccademyResponseDTO accademyResponseDTO;
+    private AcademyResponseDTO academyResponseDTO;
 }

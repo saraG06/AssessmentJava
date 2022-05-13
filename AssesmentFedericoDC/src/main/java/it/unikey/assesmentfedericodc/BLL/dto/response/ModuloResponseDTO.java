@@ -13,6 +13,6 @@ public class ModuloResponseDTO implements Serializable {
     private String docente;
     private LocalDate dataInizio;
     private LocalDate dataFine;
-    private AccademyResponseDTO accademyResponseDTO;
+    private AcademyResponseDTO academyResponseDTO;
 
 }

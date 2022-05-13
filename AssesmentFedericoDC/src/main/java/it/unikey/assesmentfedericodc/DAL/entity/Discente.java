@@ -20,8 +20,8 @@ public class Discente {
     @Column(name = "codiceFiscale")
     private String codiceFiscale;
     @ManyToOne(cascade= CascadeType.ALL)
-    @JoinColumn(name="accademy_id" )
-    private Accademy accademy;
+    @JoinColumn(name="academy_id" )
+    private Academy academy;
 
 
 }
