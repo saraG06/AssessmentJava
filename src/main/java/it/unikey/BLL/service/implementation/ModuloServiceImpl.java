@@ -5,6 +5,7 @@ import it.unikey.BLL.dto.response.ModuloResponseDTO;
 import it.unikey.BLL.exception.IdNotFoundException;
 import it.unikey.BLL.mapper.implementation.request.AcademyRequestMapper;
 import it.unikey.BLL.mapper.implementation.request.ModuloRequestMapper;
+import it.unikey.BLL.mapper.implementation.response.AcademyResponseMapper;
 import it.unikey.BLL.mapper.implementation.response.ModuloResponseMapper;
 import it.unikey.BLL.service.abstraction.ModuloService;
 import it.unikey.DAL.entity.Academy;
@@ -22,6 +23,7 @@ public class ModuloServiceImpl implements ModuloService {
     private final ModuloResponseMapper moduloResponseMapper;
     private final ModuloRequestMapper moduloRequestMapper;
     private final AcademyRequestMapper academyRequestMapper;
+    private final AcademyResponseMapper academyResponseMapper;
 
     @Override
     public void saveModulo(ModuloRequestDTO moduloRequestDTO) {
@@ -36,6 +38,9 @@ public class ModuloServiceImpl implements ModuloService {
         Modulo m = null;
         if (moduloRepository.findById(id).isPresent()) {
             m = moduloRepository.findById(id).get();
+            ModuloResponseDTO mDTO = moduloResponseMapper.asDto(m);
+            mDTO.setAcademyResponseDTO(academyResponseMapper.asDto(m.getAcademy()));
+            return mDTO;
         }
         if(m == null){
             throw new IdNotFoundException("Id " + id + " non è presente nel db");

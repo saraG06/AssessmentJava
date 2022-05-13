@@ -5,6 +5,7 @@ import it.unikey.BLL.dto.response.DiscenteResponseDTO;
 import it.unikey.BLL.exception.IdNotFoundException;
 import it.unikey.BLL.mapper.implementation.request.AcademyRequestMapper;
 import it.unikey.BLL.mapper.implementation.request.DiscenteRequestMapper;
+import it.unikey.BLL.mapper.implementation.response.AcademyResponseMapper;
 import it.unikey.BLL.mapper.implementation.response.DiscenteResponseMapper;
 import it.unikey.BLL.service.abstraction.DiscenteService;
 import it.unikey.DAL.entity.Academy;
@@ -21,11 +22,12 @@ public class DiscenteServiceImpl implements DiscenteService {
     private final DiscenteRepository  discenteRepository;
     private final DiscenteRequestMapper discenteRequestMapper;
     private final DiscenteResponseMapper discenteResponseMapper;
-    private final AcademyRequestMapper academyResponseMapper;
+    private final AcademyRequestMapper academyRequestMapper;
+    private final AcademyResponseMapper academyResponseMapper;
     @Override
     public void saveDiscente(DiscenteRequestDTO discenteRequestDTO) {
         Discente d = discenteRequestMapper.asEntity(discenteRequestDTO);
-        Academy a = academyResponseMapper.asEntity(discenteRequestDTO.getAcademyRequestDTO());
+        Academy a = academyRequestMapper.asEntity(discenteRequestDTO.getAcademyRequestDTO());
         d.setAcademy(a);
         discenteRepository.save(d);
     }
@@ -35,6 +37,9 @@ public class DiscenteServiceImpl implements DiscenteService {
         Discente d = null;
         if (discenteRepository.findById(id).isPresent()) {
             d = discenteRepository.findById(id).get();
+            DiscenteResponseDTO dDTO = discenteResponseMapper.asDto(d);
+            dDTO.setAcademyResponseDTO(academyResponseMapper.asDto(d.getAcademy()));
+            return dDTO;
         }
         if(d == null){
             throw new IdNotFoundException("Id " + id + " non è presente nel db");

@@ -7,7 +7,9 @@ import it.unikey.BLL.mapper.implementation.request.AcademyRequestMapper;
 import it.unikey.BLL.mapper.implementation.request.DiscenteRequestMapper;
 import it.unikey.BLL.mapper.implementation.request.DocenteRequestMapper;
 import it.unikey.BLL.mapper.implementation.request.ModuloRequestMapper;
+import it.unikey.BLL.mapper.implementation.response.AcademyResponseMapper;
 import it.unikey.BLL.mapper.implementation.response.DocenteResponseMapper;
+import it.unikey.BLL.mapper.implementation.response.ModuloResponseMapper;
 import it.unikey.BLL.service.abstraction.DocenteService;
 import it.unikey.DAL.entity.Academy;
 import it.unikey.DAL.entity.Docente;
@@ -26,6 +28,8 @@ public class DocenteServiceImpl implements DocenteService {
     private final DocenteResponseMapper docenteResponseMapper;
     private final ModuloRequestMapper moduloRequestMapper;
     private final AcademyRequestMapper academyRequestMapper;
+    private final ModuloResponseMapper moduloResponseMapper;
+    private final AcademyResponseMapper academyResponseMapper;
 
     @Override
     public void saveDocente(DocenteRequestDTO docenteRequestDTO) {
@@ -42,6 +46,10 @@ public class DocenteServiceImpl implements DocenteService {
         Docente d = null;
         if (docenteRepository.findById(id).isPresent()) {
             d = docenteRepository.findById(id).get();
+            DocenteResponseDTO dDTO = docenteResponseMapper.asDto(d);
+            dDTO.setAcademyResponseDTO(academyResponseMapper.asDto(d.getAcademy()));
+            dDTO.setModuloResponseDTO(moduloResponseMapper.asDto(d.getModulo()));
+            return dDTO;
         }
         if(d == null){
             throw new IdNotFoundException("Id " + id + " non è presente nel db");

@@ -25,5 +25,5 @@ public class AcademyResponseDTO {
 
     private List<DocenteResponseDTO> docenteResponseDTOList;
     private List<DiscenteResponseDTO> discenteResponseDTOList;
-    private List<ModuloRequestDTO> moduloRequestDTOList;
+    private List<ModuloResponseDTO> moduloResponseDTOList;
 }

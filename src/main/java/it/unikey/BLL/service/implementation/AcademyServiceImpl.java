@@ -8,6 +8,9 @@ import it.unikey.BLL.mapper.implementation.request.DiscenteRequestMapper;
 import it.unikey.BLL.mapper.implementation.request.DocenteRequestMapper;
 import it.unikey.BLL.mapper.implementation.request.ModuloRequestMapper;
 import it.unikey.BLL.mapper.implementation.response.AcademyResponseMapper;
+import it.unikey.BLL.mapper.implementation.response.DiscenteResponseMapper;
+import it.unikey.BLL.mapper.implementation.response.DocenteResponseMapper;
+import it.unikey.BLL.mapper.implementation.response.ModuloResponseMapper;
 import it.unikey.BLL.service.abstraction.AcademyService;
 import it.unikey.DAL.entity.Academy;
 import it.unikey.DAL.entity.Discente;
@@ -29,16 +32,16 @@ public class AcademyServiceImpl implements AcademyService {
     private final DocenteRequestMapper docenteRequestMapper;
     private final DiscenteRequestMapper discenteRequestMapper;
     private final ModuloRequestMapper moduloRequestMapper;
+    private final DocenteResponseMapper docenteResponseMapper;
+    private final DiscenteResponseMapper discenteResponseMapper;
+    private final ModuloResponseMapper moduloResponseMapper;
 
     @Override
     public void saveAcademy(AcademyRequestDTO academyRequestDTO) {
         Academy a = academyRequestMapper.asEntity(academyRequestDTO);
-        List<Docente> docenteList = docenteRequestMapper.asEntityList(academyRequestDTO.getDocenteRequestDTOList());
-        List<Discente> discenteList = discenteRequestMapper.asEntityList(academyRequestDTO.getDiscenteRequestDTOList());
-        List<Modulo> moduloList = moduloRequestMapper.asEntityList(academyRequestDTO.getModuloRequestDTOList());
-        a.setDocenteList(docenteList);
-        a.setDiscenteList(discenteList);
-        a.setModuloList(moduloList);
+        a.setDocenteList(docenteRequestMapper.asEntityList(academyRequestDTO.getDocenteRequestDTOList()));
+        a.setDiscenteList(discenteRequestMapper.asEntityList(academyRequestDTO.getDiscenteRequestDTOList()));
+        a.setModuloList(moduloRequestMapper.asEntityList(academyRequestDTO.getModuloRequestDTOList()));
         academyRepository.save(a);
     }
 
@@ -47,6 +50,11 @@ public class AcademyServiceImpl implements AcademyService {
         Academy a = null;
         if (academyRepository.findById(id).isPresent()) {
             a = academyRepository.findById(id).get();
+            AcademyResponseDTO aDto = academyResponseMapper.asDto(a);
+            aDto.setModuloResponseDTOList(moduloResponseMapper.asDTOList(a.getModuloList()));
+            aDto.setDiscenteResponseDTOList(discenteResponseMapper.asDTOList(a.getDiscenteList()));
+            aDto.setDocenteResponseDTOList(docenteResponseMapper.asDTOList(a.getDocenteList()));
+            return aDto;
         }
         if(a == null){
             throw new IdNotFoundException("Id " + id + " non è presente nel db");
