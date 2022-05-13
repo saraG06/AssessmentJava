@@ -1,6 +1,5 @@
 package it.unikey.testfinale.BLL.service.impl;
 
-import it.unikey.testfinale.BLL.Exception.AlreadyExistsException;
 import it.unikey.testfinale.BLL.mapper.dto.request.DocenteRequestDTO;
 import it.unikey.testfinale.BLL.mapper.dto.response.DocenteResponseDTO;
 import it.unikey.testfinale.BLL.mapper.implementation.request.DocenteRequestMapper;
@@ -28,7 +27,7 @@ public class DocenteServiceImpl implements DocenteService {
 
 
     @Override
-    public void saveDocente(DocenteRequestDTO docenteRequestDTO) throws AlreadyExistsException {
+    public void saveDocente(DocenteRequestDTO docenteRequestDTO){
         Docente d= docenteRequestMapper.asEntity(docenteRequestDTO);
         d.setModuloList(moduloRequestMapper.asEntityList(docenteRequestDTO.getModuloRequestDTOList()));
         docenteRepository.save(d);
@@ -66,4 +65,18 @@ public class DocenteServiceImpl implements DocenteService {
         }
         return docenteRList;
     }
+
+    @Override
+    public DocenteResponseDTO findByEmail(String email) {
+        Docente d= docenteRepository.findByEmail(email);
+        if(d!=null){
+            DocenteResponseDTO dResDTO= docenteResponseMapper.asDTO(d);
+            dResDTO.setModuloResponseDTOList(moduloResponseMapper.asDTOList(d.getModuloList()));
+            return dResDTO;
+        }
+        else
+            throw new EntityNotFoundException();
+    }
+
+
 }

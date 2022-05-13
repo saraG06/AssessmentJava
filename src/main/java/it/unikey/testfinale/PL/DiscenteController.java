@@ -3,10 +3,7 @@ package it.unikey.testfinale.PL;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
-import it.unikey.testfinale.BLL.Exception.AlreadyExistsException;
-import it.unikey.testfinale.BLL.mapper.dto.request.AcademyRequestDTO;
 import it.unikey.testfinale.BLL.mapper.dto.request.DiscenteRequestDTO;
-import it.unikey.testfinale.BLL.mapper.dto.response.AcademyResponseDTO;
 import it.unikey.testfinale.BLL.mapper.dto.response.DiscenteResponseDTO;
 import it.unikey.testfinale.BLL.service.abstraction.DiscenteService;
 import lombok.RequiredArgsConstructor;
@@ -33,7 +30,7 @@ public class DiscenteController {
             @ApiResponse(code= 201, message= "risorsa creata"),
             @ApiResponse(code= 404, message= "pagina non trovata")
     })
-    public ResponseEntity<Void> save(@RequestBody DiscenteRequestDTO discenteRequestDTO) throws AlreadyExistsException {
+    public ResponseEntity<Void> save(@RequestBody DiscenteRequestDTO discenteRequestDTO){
         discenteService.saveDiscente(discenteRequestDTO);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }

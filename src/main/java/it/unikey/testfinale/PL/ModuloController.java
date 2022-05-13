@@ -3,7 +3,6 @@ package it.unikey.testfinale.PL;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
-import it.unikey.testfinale.BLL.Exception.AlreadyExistsException;
 import it.unikey.testfinale.BLL.Exception.ConflictBetweenAttributesException;
 import it.unikey.testfinale.BLL.mapper.dto.request.ModuloRequestDTO;
 import it.unikey.testfinale.BLL.mapper.dto.response.ModuloResponseDTO;
@@ -32,7 +31,7 @@ public class ModuloController {
             @ApiResponse(code= 201, message= "risorsa creata"),
             @ApiResponse(code= 404, message= "pagina non trovata")
     })
-    public ResponseEntity<Void> save(@RequestBody ModuloRequestDTO moduloRequestDTO) throws AlreadyExistsException, ConflictBetweenAttributesException {
+    public ResponseEntity<Void> save(@RequestBody ModuloRequestDTO moduloRequestDTO) throws ConflictBetweenAttributesException {
         moduloService.saveModulo(moduloRequestDTO);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }

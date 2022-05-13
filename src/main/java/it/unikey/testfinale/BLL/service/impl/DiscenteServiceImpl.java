@@ -1,6 +1,5 @@
 package it.unikey.testfinale.BLL.service.impl;
 
-import it.unikey.testfinale.BLL.Exception.AlreadyExistsException;
 import it.unikey.testfinale.BLL.mapper.dto.request.DiscenteRequestDTO;
 import it.unikey.testfinale.BLL.mapper.dto.response.DiscenteResponseDTO;
 import it.unikey.testfinale.BLL.mapper.implementation.request.AcademyRequestMapper;
@@ -9,6 +8,7 @@ import it.unikey.testfinale.BLL.mapper.implementation.response.AcademyResponseMa
 import it.unikey.testfinale.BLL.mapper.implementation.response.DiscenteResponseMapper;
 import it.unikey.testfinale.BLL.service.abstraction.DiscenteService;
 import it.unikey.testfinale.DAL.Entity.Discente;
+import it.unikey.testfinale.DAL.Repository.AcademyRepository;
 import it.unikey.testfinale.DAL.Repository.DiscenteRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -27,7 +27,7 @@ public class DiscenteServiceImpl implements DiscenteService {
     private final AcademyResponseMapper academyResponseMapper;
 
     @Override
-    public void saveDiscente(DiscenteRequestDTO discenteRequestDTO) throws AlreadyExistsException {
+    public void saveDiscente(DiscenteRequestDTO discenteRequestDTO){
         Discente d= discenteRequestMapper.asEntity(discenteRequestDTO);
         d.setAcademy(academyRequestMapper.asEntity(discenteRequestDTO.getAcademyRequestDTO()));
         discenteRepository.save(d);

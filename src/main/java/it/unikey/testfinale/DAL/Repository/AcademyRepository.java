@@ -14,7 +14,7 @@ public interface AcademyRepository extends JpaRepository<Academy, Long> {
 
     //ricercare la/e academy filtrando per nome
     @Query(value= "SELECT * " +
-            "FROM academy a " +
+            "FROM academy a, discente di, docente do, modulo m " +
             "WHERE a.id= m.academy_id AND a.id= di.academy_id AND do.id= m.docente_id " +
             "AND a.nome LIKE '%:nome%'", nativeQuery = true)
     List<Academy> findByNome(@Param("nome") String nome);

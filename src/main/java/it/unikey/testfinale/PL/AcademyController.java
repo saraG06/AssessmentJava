@@ -3,7 +3,6 @@ package it.unikey.testfinale.PL;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
-import it.unikey.testfinale.BLL.Exception.AlreadyExistsException;
 import it.unikey.testfinale.BLL.Exception.ConflictBetweenAttributesException;
 import it.unikey.testfinale.BLL.mapper.dto.request.AcademyRequestDTO;
 import it.unikey.testfinale.BLL.mapper.dto.response.AcademyResponseDTO;
@@ -32,7 +31,7 @@ public class AcademyController {
             @ApiResponse(code= 201, message= "risorsa creata"),
             @ApiResponse(code= 404, message= "pagina non trovata")
     })
-    public ResponseEntity<Void> save(@RequestBody AcademyRequestDTO academyRequestDTO) throws AlreadyExistsException, ConflictBetweenAttributesException {
+    public ResponseEntity<Void> save(@RequestBody AcademyRequestDTO academyRequestDTO) throws ConflictBetweenAttributesException {
         academyService.saveAcademy(academyRequestDTO);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }

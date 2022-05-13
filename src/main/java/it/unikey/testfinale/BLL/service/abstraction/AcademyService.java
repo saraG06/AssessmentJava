@@ -1,6 +1,5 @@
 package it.unikey.testfinale.BLL.service.abstraction;
 
-import it.unikey.testfinale.BLL.Exception.AlreadyExistsException;
 import it.unikey.testfinale.BLL.Exception.ConflictBetweenAttributesException;
 import it.unikey.testfinale.BLL.mapper.dto.request.AcademyRequestDTO;
 import it.unikey.testfinale.BLL.mapper.dto.request.ModuloRequestDTO;
@@ -11,7 +10,7 @@ import java.util.List;
 
 public interface AcademyService {
 
-    void saveAcademy(AcademyRequestDTO academyRequestDTO) throws ConflictBetweenAttributesException, AlreadyExistsException;
+    void saveAcademy(AcademyRequestDTO academyRequestDTO) throws ConflictBetweenAttributesException;
 
     AcademyResponseDTO findById(Long id);
 

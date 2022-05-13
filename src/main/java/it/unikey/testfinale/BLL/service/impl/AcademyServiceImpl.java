@@ -1,6 +1,5 @@
 package it.unikey.testfinale.BLL.service.impl;
 
-import it.unikey.testfinale.BLL.Exception.AlreadyExistsException;
 import it.unikey.testfinale.BLL.Exception.ConflictBetweenAttributesException;
 import it.unikey.testfinale.BLL.mapper.dto.request.AcademyRequestDTO;
 import it.unikey.testfinale.BLL.mapper.dto.request.ModuloRequestDTO;
@@ -34,7 +33,7 @@ public class AcademyServiceImpl implements AcademyService {
     private final DiscenteResponseMapper discenteResponseMapper;
 
     @Override
-    public void saveAcademy(AcademyRequestDTO academyRequestDTO) throws ConflictBetweenAttributesException, AlreadyExistsException {
+    public void saveAcademy(AcademyRequestDTO academyRequestDTO) throws ConflictBetweenAttributesException{
         if(academyRequestDTO.getDataInizio().isBefore(academyRequestDTO.getDataFine())) {       //la data di inizio deve essere prima della data di fine
             Academy a = academyRequestMapper.asEntity(academyRequestDTO);
             a.setModuloList(moduloRequestMapper.asEntityList(academyRequestDTO.getModuloRequestDTOList()));

@@ -1,6 +1,5 @@
 package it.unikey.testfinale.BLL.service.impl;
 
-import it.unikey.testfinale.BLL.Exception.AlreadyExistsException;
 import it.unikey.testfinale.BLL.Exception.ConflictBetweenAttributesException;
 import it.unikey.testfinale.BLL.mapper.dto.request.ModuloRequestDTO;
 import it.unikey.testfinale.BLL.mapper.dto.response.ModuloResponseDTO;
@@ -12,8 +11,6 @@ import it.unikey.testfinale.BLL.mapper.implementation.response.DocenteResponseMa
 import it.unikey.testfinale.BLL.mapper.implementation.response.ModuloResponseMapper;
 import it.unikey.testfinale.BLL.service.abstraction.ModuloService;
 import it.unikey.testfinale.DAL.Entity.Modulo;
-import it.unikey.testfinale.DAL.Repository.AcademyRepository;
-import it.unikey.testfinale.DAL.Repository.DocenteRepository;
 import it.unikey.testfinale.DAL.Repository.ModuloRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -28,16 +25,17 @@ public class ModuloServiceImpl implements ModuloService {
     private final ModuloRepository moduloRepository;
     private final ModuloRequestMapper moduloRequestMapper;
     private final ModuloResponseMapper moduloResponseMapper;
-    private final DocenteRepository docenteRepository;
     private final DocenteRequestMapper docenteRequestMapper;
     private final DocenteResponseMapper docenteResponseMapper;
-    private final AcademyRepository academyRepository;
     private final AcademyRequestMapper academyRequestMapper;
     private final AcademyResponseMapper academyResponseMapper;
 
     @Override
-    public void saveModulo(ModuloRequestDTO moduloRequestDTO) throws AlreadyExistsException, ConflictBetweenAttributesException {
-        if(moduloRequestDTO.getInizio().isBefore(moduloRequestDTO.getFine())) {       //la data di inizio deve essere prima della data di fine
+    public void saveModulo(ModuloRequestDTO moduloRequestDTO) throws ConflictBetweenAttributesException {
+        if(moduloRequestDTO.getInizio().isBefore(moduloRequestDTO.getFine()) ||                                     //la data di inizio deve essere prima della data di fine
+                moduloRequestDTO.getInizio().isBefore(moduloRequestDTO.getAcademyRequestDTO().getDataInizio()) ||   //il modulo non può iniziare se non è iniziata l'Academy
+                moduloRequestDTO.getFine().isAfter(moduloRequestDTO.getAcademyRequestDTO().getDataFine()))          //il modulo non può finire se non è finita l'Academy
+                {
             Modulo m = moduloRequestMapper.asEntity(moduloRequestDTO);
             m.setDocente(docenteRequestMapper.asEntity(moduloRequestDTO.getDocenteRequestDTO()));
             m.setAcademy(academyRequestMapper.asEntity(moduloRequestDTO.getAcademyRequestDTO()));
