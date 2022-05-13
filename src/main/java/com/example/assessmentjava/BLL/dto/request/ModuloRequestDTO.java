@@ -1,11 +1,11 @@
 package com.example.assessmentjava.BLL.dto.request;
 
-import com.example.assessmentjava.DAL.Entity.Academy;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 @Data
-public class ModuloRequestDTO {
+public class ModuloRequestDTO implements Serializable {
     private String nome;
     private String argomento;
     private String docente;

@@ -12,13 +12,13 @@ public class Academy {
     private Long id;
     @Column(name = "nome", nullable = false)
     private String nome;
-    @Column(name = "dataInizio")
+    @Column(name = "dataInizio",nullable = false)
     private LocalDate dataInizio;
-    @Column(name = "dataFine")
+    @Column(name = "dataFine",nullable = false)
     private LocalDate dataFine;
-    @OneToMany(mappedBy = "academy")
+    @OneToMany(mappedBy = "academy",cascade = {CascadeType.MERGE,CascadeType.PERSIST})
     private List<Modulo> moduloList;
-    @OneToMany(mappedBy = "academy")
+    @OneToMany(mappedBy = "academy",cascade = {CascadeType.MERGE,CascadeType.PERSIST})
     private List<Discente> discenteList;
 
     public Long getId() {

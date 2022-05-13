@@ -12,4 +12,5 @@ public interface AcademyService {
     void deleteByid(Long id) throws NullPointerException;
     List<AcademyResponseDTO> findAllAcademy();
     List<AcademyResponseDTO> findByName(String name);
+    List<AcademyResponseDTO> findByModulo(String modulo) throws NullPointerException;
 }

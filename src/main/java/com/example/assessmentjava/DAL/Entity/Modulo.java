@@ -19,7 +19,8 @@ public class Modulo {
     private LocalDate dataInizioModulo;
     @Column(name = "dataFineModulo", nullable = false)
     private LocalDate dataFineModulo;
-    @ManyToOne(fetch = FetchType.LAZY,cascade = {CascadeType.MERGE,CascadeType.PERSIST})
+    @ManyToOne(cascade = {CascadeType.MERGE,CascadeType.PERSIST})
+    @JoinColumn(name="academy_id")
     private Academy academy;
 
     public Long getId() {

@@ -1,6 +1,8 @@
 package com.example.assessmentjava.BLL.service.impl;
 
 import com.example.assessmentjava.BLL.dto.request.AcademyRequestDTO;
+import com.example.assessmentjava.BLL.dto.request.DiscenteRequestDTO;
+import com.example.assessmentjava.BLL.dto.request.ModuloRequestDTO;
 import com.example.assessmentjava.BLL.dto.response.AcademyResponseDTO;
 import com.example.assessmentjava.BLL.mapper.implementation.*;
 import com.example.assessmentjava.BLL.service.abstraction.AcademyService;
@@ -28,11 +30,18 @@ public class AcademyServiceImpl implements AcademyService {
     @Override
     public void saveAcademy(AcademyRequestDTO academyRequestDTO) {
         Academy a = academyRequestMapper.asEntity(academyRequestDTO);
-        List<Modulo> moduloList= moduloRequestMapper.asEntityList(academyRequestDTO.getModuloRequestDTOList());
-        List<Discente> discenteList= discenteRequestMapper.asEntityList(academyRequestDTO.getDiscenteRequestDTOList());
-        a.setModuloList(moduloList);
-        a.setDiscenteList(discenteList);
-
+        a.setDiscenteList(new ArrayList<>());
+        a.setModuloList(new ArrayList<>());
+        for(DiscenteRequestDTO d : academyRequestDTO.getDiscenteRequestDTOList()){
+            Discente discente = discenteRequestMapper.asEntity(d);
+            discente.setAcademy(a);
+            a.getDiscenteList().add(discente);
+        }
+        for(ModuloRequestDTO m : academyRequestDTO.getModuloRequestDTOList()){
+            Modulo modulo = moduloRequestMapper.asEntity(m) ;
+            modulo.setAcademy(a);
+            a.getModuloList().add(modulo);
+        }
         academyRepository.save(a);
     }
 
@@ -77,6 +86,15 @@ public class AcademyServiceImpl implements AcademyService {
         }
         else
             return null;
+    }
+
+    @Override
+    public List<AcademyResponseDTO> findByModulo(String modulo) throws NullPointerException{
+        if(academyRepository.findByModulo(modulo) != null){
+            return academyResponseMapper.asDTOList(academyRepository.findByModulo(modulo));
+        }
+        else
+            throw new NullPointerException("Il modulo non è presente nel db");
     }
 
 

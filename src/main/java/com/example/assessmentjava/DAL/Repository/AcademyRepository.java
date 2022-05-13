@@ -12,4 +12,7 @@ import java.util.List;
 public interface AcademyRepository extends JpaRepository<Academy, Long> {
     @Query("select a from Academy a where a.nome like %:nome%")
     List<Academy> findByName(@Param("nome") String nome);
+
+    @Query("SELECT  a FROM Academy a, Modulo m WHERE m.academy.id = a.id AND m.nome LIKE %:nome% ")
+    List<Academy> findByModulo(@Param("nome") String nome);
 }

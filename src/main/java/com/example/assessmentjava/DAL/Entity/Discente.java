@@ -14,7 +14,8 @@ public class Discente {
     private String nome;
     @Column(name = "cognome", nullable = false)
     private String cognome;
-    @ManyToOne(fetch = FetchType.LAZY,cascade = {CascadeType.MERGE,CascadeType.PERSIST})
+    @ManyToOne(cascade = {CascadeType.MERGE,CascadeType.PERSIST})
+    @JoinColumn(name="academy_id")
     private Academy academy;
 
     public Long getId() {
