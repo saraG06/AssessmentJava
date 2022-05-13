@@ -2,9 +2,11 @@ package it.unikey.assessmentjava.BLL.service.implementation;
 
 import it.unikey.assessmentjava.BLL.DTO.request.DiscenteRequestDTO;
 import it.unikey.assessmentjava.BLL.DTO.response.DiscenteResponseDTO;
+import it.unikey.assessmentjava.BLL.mapper.implementation.AcademyRequestMapper;
 import it.unikey.assessmentjava.BLL.mapper.implementation.DiscenteRequestMapper;
 import it.unikey.assessmentjava.BLL.mapper.implementation.DiscenteResponseMapper;
 import it.unikey.assessmentjava.BLL.service.abstraction.DiscenteService;
+import it.unikey.assessmentjava.DAL.entity.Discente;
 import it.unikey.assessmentjava.DAL.repository.DiscenteRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -21,21 +23,30 @@ public class DiscenteServiceImpl implements DiscenteService {
 
     @Override
     public void saveDiscente(DiscenteRequestDTO discenteRequestDTO) {
-
+        Discente d = discenteRequestMapper.asEntity(discenteRequestDTO);
+        discenteRepository.save(d);
     }
 
     @Override
     public List<DiscenteResponseDTO> findAllDiscente() {
-        return null;
+        List<Discente> dList = discenteRepository.findAll();
+        return discenteResponseMapper.asDTOList(dList);
     }
 
     @Override
-    public DiscenteResponseDTO findDiscenteById(Long id) {
-        return null;
+    public DiscenteResponseDTO findDiscenteById(Long id) throws NullPointerException{
+        Discente d = discenteRepository.getById(id);
+        if(id != null)
+            return discenteResponseMapper.asDTO(d);
+        else
+            throw new NullPointerException();
     }
 
     @Override
-    public void deleteDiscenteById(Long id) {
-
+    public void deleteDiscenteById(Long id) throws NullPointerException{
+        if(discenteRepository.existsById(id))
+            discenteRepository.deleteById(id);
+        else
+            throw new NullPointerException();
     }
 }
