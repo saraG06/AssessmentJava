@@ -6,6 +6,7 @@ import io.swagger.annotations.ApiResponses;
 import it.unikey.assesmentfedericodc.BLL.dto.request.DiscenteRequestDTO;
 import it.unikey.assesmentfedericodc.BLL.dto.response.DiscenteResponseDTO;
 import it.unikey.assesmentfedericodc.BLL.service.abstraction.DiscenteService;
+import it.unikey.assesmentfedericodc.DAL.exception.CodiceFiscaleNonValidoException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,8 +29,13 @@ public class DiscenteController {
             @ApiResponse(code= 404, message= "resource not found")
     })
     public ResponseEntity<Void> save(@RequestBody DiscenteRequestDTO discenteRequestDTO){
-        discenteService.saveDiscente(discenteRequestDTO);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        try {
+            discenteService.saveDiscente(discenteRequestDTO);
+            return new ResponseEntity<>(HttpStatus.CREATED);
+        } catch (CodiceFiscaleNonValidoException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
+        }
+
     }
 
     @GetMapping(path= "/{id}")      //le graffe indicano una variabile

@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 
 @RestController
@@ -39,8 +40,14 @@ public class AcademyController {
             @ApiResponse(code= 404, message= "resource not found")
     })
     public ResponseEntity<AcademyResponseDTO> getById(@PathVariable Long id) {
+        try{
+            ResponseEntity<AcademyResponseDTO> a = new ResponseEntity<>(academyService.findById(id), HttpStatus.OK) ;
+            return a;
+        }catch(EntityNotFoundException e){
+            ResponseEntity<AcademyResponseDTO> a = new ResponseEntity<>(HttpStatus.NOT_FOUND) ;
+            return a;
+        }
 
-        return new ResponseEntity<>(academyService.findById(id), HttpStatus.OK);
 
     }
 

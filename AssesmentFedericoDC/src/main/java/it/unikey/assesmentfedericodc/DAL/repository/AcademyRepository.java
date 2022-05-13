@@ -18,8 +18,8 @@ public interface AcademyRepository extends JpaRepository<Academy,Long> {
     List<Academy> findByNome(@Param("nome") String nome);
 
     //tutte le accademy che abbiano un modulo il cui nome comprenda la stringa passata a paramentro
-    @Query(value = "SELECT  a FROM Academy a, Modulo m  " +
-            "WHERE m.academy= a AND m.nome LIKE '%'+:nome+'%' ")
+    @Query(value = "SELECT DISTINCT a FROM Academy a, Modulo m  " +
+            "WHERE m.academy= a AND m.nome LIKE '%'+:nome+'%' " )
     List<Academy> findByModulo(@Param("nome") String nomeModulo);
 
     //tutte le academy la cui data di inizio dia successiva a quella passata a parametro

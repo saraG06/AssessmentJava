@@ -13,6 +13,6 @@ public class AcademyResponseDTO implements Serializable {
     private String nome;
     private LocalDate dataInizio;
     private LocalDate dataFine;
-    List<DiscenteResponseDTO> discenteResponseDTOList;
-    List<ModuloResponseDTO> moduloResponseDTOList;
+    private List<DiscenteResponseDTO> discenteResponseDTOList;
+    private List<ModuloResponseDTO> moduloResponseDTOList;
 }

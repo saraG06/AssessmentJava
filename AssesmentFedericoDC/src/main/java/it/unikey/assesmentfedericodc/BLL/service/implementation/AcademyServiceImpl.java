@@ -9,6 +9,7 @@ import it.unikey.assesmentfedericodc.BLL.service.abstraction.AcademyService;
 import it.unikey.assesmentfedericodc.DAL.entity.Academy;
 import it.unikey.assesmentfedericodc.DAL.entity.Discente;
 import it.unikey.assesmentfedericodc.DAL.entity.Modulo;
+import it.unikey.assesmentfedericodc.DAL.exception.CodiceFiscaleNonValidoException;
 import it.unikey.assesmentfedericodc.DAL.repository.AcademyRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -31,15 +32,21 @@ public class AcademyServiceImpl implements AcademyService {
 
     @Override
     public void saveAcademy(AcademyRequestDTO academyRequestDTO) {
+        //trasforma l'academyrequestDto in academy, setta moduli discenti e moduli con nuove liste
+        //e le riempe prendendo gli elemti DiscenteRequestDTOList e ModuloRequestDTOList, trasformandoli
+        //in entity,settandogli l'accademiy e aggiungendoli alla lista
+        //infine salva l'academy
         Academy a = academyRequestMapper.asEntity(academyRequestDTO);
 //        a.setDiscenti(discenteRequestMapper.asEntityList(academyRequestDTO.getDiscenteRequestDTOList()));
 //        a.setModuli(moduloRequestMapper.asEntityList(academyRequestDTO.getModuloRequestDTOList()));
         a.setDiscenti(new ArrayList<>());
         a.setModuli(new ArrayList<>());
         for(DiscenteRequestDTO d : academyRequestDTO.getDiscenteRequestDTOList()){
-            Discente discente = discenteRequestMapper.asEntity(d);
-            discente.setAcademy(a);
-            a.getDiscenti().add(discente);
+            if (d.getCodiceFiscale().length() == 16) {//se il codice fiscale non è corretto non lo inserisce
+                Discente discente = discenteRequestMapper.asEntity(d);
+                discente.setAcademy(a);
+                a.getDiscenti().add(discente);
+            }
         }
         for(ModuloRequestDTO m : academyRequestDTO.getModuloRequestDTOList()){
             Modulo modulo = moduloRequestMapper.asEntity(m) ;

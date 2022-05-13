@@ -8,12 +8,14 @@ import it.unikey.assesmentfedericodc.BLL.mapper.implementation.DiscenteRequestMa
 import it.unikey.assesmentfedericodc.BLL.mapper.implementation.DiscenteResponseMapper;
 import it.unikey.assesmentfedericodc.BLL.service.abstraction.DiscenteService;
 import it.unikey.assesmentfedericodc.DAL.entity.Discente;
+import it.unikey.assesmentfedericodc.DAL.exception.CodiceFiscaleNonValidoException;
 import it.unikey.assesmentfedericodc.DAL.repository.DiscenteRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.ArrayList;
+import java.util.IllegalFormatWidthException;
 import java.util.List;
 
 @Service
@@ -27,10 +29,14 @@ public class DiscenteServiceImpl implements DiscenteService {
     private final AcademyRequestMapper academyRequestMapper;
 
     @Override
-    public void saveDiscente(DiscenteRequestDTO discenteRequestDTO) {
-        Discente d = discenteRequestMapper.asEntity(discenteRequestDTO);
-        d.setAcademy(academyRequestMapper.asEntity(discenteRequestDTO.getAcademyRequestDTO()));
-        discenteRepository.save(d);
+    public void saveDiscente(DiscenteRequestDTO discenteRequestDTO) throws CodiceFiscaleNonValidoException {
+        //controlla se il formato del cf e' corretto,altrimenti lancia un eccezione
+        if (discenteRequestDTO.getCodiceFiscale().length() == 16) {
+            Discente d = discenteRequestMapper.asEntity(discenteRequestDTO);
+            d.setAcademy(academyRequestMapper.asEntity(discenteRequestDTO.getAcademyRequestDTO()));
+            discenteRepository.save(d);
+        }else throw new CodiceFiscaleNonValidoException() ;
+
     }
 
     @Override

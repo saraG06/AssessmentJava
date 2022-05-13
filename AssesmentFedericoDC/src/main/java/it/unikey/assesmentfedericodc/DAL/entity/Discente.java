@@ -21,7 +21,7 @@ public class Discente {
     @Column(name = "cognome",nullable = false)
     @ApiModelProperty(notes= "cognome discente", example= "Rossi", required = true)
     private String cognome;
-    @Column(name = "codiceFiscale" , length=16,nullable = false)
+    @Column(name = "codiceFiscale" , length = 16 ,nullable = false)
     @ApiModelProperty(notes= "CF discente", example= "DFRESV86H13Y603P" , required = true)
     private String codiceFiscale;
     @ManyToOne(cascade= CascadeType.ALL)
