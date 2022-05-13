@@ -36,4 +36,9 @@ public class Modulo {
     @Column(name= "argomenti", nullable = false)
     @ApiModelProperty(notes= "Data fine modulo", example= "2021-04-21", required = true)
     private LocalDate fine;
+
+    @JoinColumn(name= "academy_id", nullable = false)
+    @ManyToOne(cascade = CascadeType.ALL)
+    @ApiModelProperty(notes= "Relazione ManyToOne con academy", required = true)
+    private Academy academy;
 }

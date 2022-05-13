@@ -26,4 +26,9 @@ public class Discente {
     @Column(name= "cognome", nullable = false)
     @ApiModelProperty(notes= "Cognome docente", example= "Rossa", required = true)
     private String cognome;
+
+    @JoinColumn(name= "academy_id", nullable = false)
+    @ManyToOne(cascade = CascadeType.ALL)
+    @ApiModelProperty(notes= "Relazione ManyToOne con academy", required = true)
+    private Academy academy;
 }
