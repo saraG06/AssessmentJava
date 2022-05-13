@@ -20,21 +20,18 @@ import java.util.List;
 @RequiredArgsConstructor
 public class DocenteServiceImpl implements DocenteService {
 
-    private DocenteRepository docenteRepository;
-    private DocenteRequestMapper docenteRequestMapper;
-    private DocenteResponseMapper docenteResponseMapper;
-    private ModuloRequestMapper moduloRequestMapper;
-    private ModuloResponseMapper moduloResponseMapper;
+    private final DocenteRepository docenteRepository;
+    private final DocenteRequestMapper docenteRequestMapper;
+    private final DocenteResponseMapper docenteResponseMapper;
+    private final ModuloRequestMapper moduloRequestMapper;
+    private final ModuloResponseMapper moduloResponseMapper;
 
 
     @Override
     public void saveDocente(DocenteRequestDTO docenteRequestDTO) throws AlreadyExistsException {
         Docente d= docenteRequestMapper.asEntity(docenteRequestDTO);
-        if(!docenteRepository.findAll().contains(d)) {
-            d.setModuloList(moduloRequestMapper.asEntityList(docenteRequestDTO.getModuloRequestDTOList()));
-            docenteRepository.save(d);
-        } else
-            throw new AlreadyExistsException();
+        d.setModuloList(moduloRequestMapper.asEntityList(docenteRequestDTO.getModuloRequestDTOList()));
+        docenteRepository.save(d);
     }
 
     @Override

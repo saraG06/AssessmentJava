@@ -3,10 +3,13 @@ package it.unikey.testfinale.PL;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import it.unikey.testfinale.BLL.Exception.AlreadyExistsException;
+import it.unikey.testfinale.BLL.Exception.ConflictBetweenAttributesException;
 import it.unikey.testfinale.BLL.mapper.dto.request.AcademyRequestDTO;
 import it.unikey.testfinale.BLL.mapper.dto.response.AcademyResponseDTO;
 import it.unikey.testfinale.BLL.service.abstraction.AcademyService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +22,7 @@ import java.util.List;
 @RequestMapping("/api/v1/academy")
 @CrossOrigin("http://localhost:8080")
 public class AcademyController {
-
+    @Autowired
     private final AcademyService academyService;
 
     @PostMapping
@@ -29,7 +32,7 @@ public class AcademyController {
             @ApiResponse(code= 201, message= "risorsa creata"),
             @ApiResponse(code= 404, message= "pagina non trovata")
     })
-    public ResponseEntity<Void> save(@RequestBody AcademyRequestDTO academyRequestDTO) {
+    public ResponseEntity<Void> save(@RequestBody AcademyRequestDTO academyRequestDTO) throws AlreadyExistsException, ConflictBetweenAttributesException {
         academyService.saveAcademy(academyRequestDTO);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }

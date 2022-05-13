@@ -20,20 +20,17 @@ import java.util.List;
 @RequiredArgsConstructor
 public class DiscenteServiceImpl implements DiscenteService {
 
-    private DiscenteRepository discenteRepository;
-    private DiscenteRequestMapper discenteRequestMapper;
-    private DiscenteResponseMapper discenteResponseMapper;
-    private AcademyRequestMapper academyRequestMapper;
-    private AcademyResponseMapper academyResponseMapper;
+    private final DiscenteRepository discenteRepository;
+    private final DiscenteRequestMapper discenteRequestMapper;
+    private final DiscenteResponseMapper discenteResponseMapper;
+    private final AcademyRequestMapper academyRequestMapper;
+    private final AcademyResponseMapper academyResponseMapper;
 
     @Override
     public void saveDiscente(DiscenteRequestDTO discenteRequestDTO) throws AlreadyExistsException {
         Discente d= discenteRequestMapper.asEntity(discenteRequestDTO);
-        if(!discenteRepository.findAll().contains(d)) {       //non deve essere già presente
-            d.setAcademy(academyRequestMapper.asEntity(discenteRequestDTO.getAcademyRequestDTO()));
-            discenteRepository.save(d);
-        } else
-            throw new AlreadyExistsException();
+        d.setAcademy(academyRequestMapper.asEntity(discenteRequestDTO.getAcademyRequestDTO()));
+        discenteRepository.save(d);
     }
 
     @Override

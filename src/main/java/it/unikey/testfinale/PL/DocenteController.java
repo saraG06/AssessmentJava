@@ -3,12 +3,14 @@ package it.unikey.testfinale.PL;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import it.unikey.testfinale.BLL.Exception.AlreadyExistsException;
 import it.unikey.testfinale.BLL.mapper.dto.request.DiscenteRequestDTO;
 import it.unikey.testfinale.BLL.mapper.dto.request.DocenteRequestDTO;
 import it.unikey.testfinale.BLL.mapper.dto.response.DiscenteResponseDTO;
 import it.unikey.testfinale.BLL.mapper.dto.response.DocenteResponseDTO;
 import it.unikey.testfinale.BLL.service.abstraction.DocenteService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,7 +23,7 @@ import java.util.List;
 @RequestMapping("/api/v1/docente")
 @CrossOrigin("http://localhost:8080")
 public class DocenteController {
-
+    @Autowired
     private DocenteService docenteService;
 
     @PostMapping
@@ -31,7 +33,7 @@ public class DocenteController {
             @ApiResponse(code= 201, message= "risorsa creata"),
             @ApiResponse(code= 404, message= "pagina non trovata")
     })
-    public ResponseEntity<Void> save(@RequestBody DocenteRequestDTO docenteRequestDTO) {
+    public ResponseEntity<Void> save(@RequestBody DocenteRequestDTO docenteRequestDTO) throws AlreadyExistsException {
         docenteService.saveDocente(docenteRequestDTO);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }

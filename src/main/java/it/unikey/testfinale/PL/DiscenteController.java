@@ -3,12 +3,14 @@ package it.unikey.testfinale.PL;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import it.unikey.testfinale.BLL.Exception.AlreadyExistsException;
 import it.unikey.testfinale.BLL.mapper.dto.request.AcademyRequestDTO;
 import it.unikey.testfinale.BLL.mapper.dto.request.DiscenteRequestDTO;
 import it.unikey.testfinale.BLL.mapper.dto.response.AcademyResponseDTO;
 import it.unikey.testfinale.BLL.mapper.dto.response.DiscenteResponseDTO;
 import it.unikey.testfinale.BLL.service.abstraction.DiscenteService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,7 +23,7 @@ import java.util.List;
 @RequestMapping("/api/v1/discente")
 @CrossOrigin("http://localhost:8080")
 public class DiscenteController {
-
+    @Autowired
     private DiscenteService discenteService;
 
     @PostMapping
@@ -31,7 +33,7 @@ public class DiscenteController {
             @ApiResponse(code= 201, message= "risorsa creata"),
             @ApiResponse(code= 404, message= "pagina non trovata")
     })
-    public ResponseEntity<Void> save(@RequestBody DiscenteRequestDTO discenteRequestDTO) {
+    public ResponseEntity<Void> save(@RequestBody DiscenteRequestDTO discenteRequestDTO) throws AlreadyExistsException {
         discenteService.saveDiscente(discenteRequestDTO);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }

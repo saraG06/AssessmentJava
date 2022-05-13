@@ -25,24 +25,21 @@ import java.util.List;
 @RequiredArgsConstructor
 public class AcademyServiceImpl implements AcademyService {
 
-    private AcademyRepository academyRepository;
-    private AcademyRequestMapper academyRequestMapper;
-    private AcademyResponseMapper academyResponseMapper;
-    private ModuloRequestMapper moduloRequestMapper;
-    private ModuloResponseMapper moduloResponseMapper;
-    private DiscenteRequestMapper discenteRequestMapper;
-    private DiscenteResponseMapper discenteResponseMapper;
+    private final AcademyRepository academyRepository;
+    private final AcademyRequestMapper academyRequestMapper;
+    private final AcademyResponseMapper academyResponseMapper;
+    private final ModuloRequestMapper moduloRequestMapper;
+    private final ModuloResponseMapper moduloResponseMapper;
+    private final DiscenteRequestMapper discenteRequestMapper;
+    private final DiscenteResponseMapper discenteResponseMapper;
 
     @Override
     public void saveAcademy(AcademyRequestDTO academyRequestDTO) throws ConflictBetweenAttributesException, AlreadyExistsException {
         if(academyRequestDTO.getDataInizio().isBefore(academyRequestDTO.getDataFine())) {       //la data di inizio deve essere prima della data di fine
             Academy a = academyRequestMapper.asEntity(academyRequestDTO);
-            if(!academyRepository.findAll().contains(a)){       //non deve essere già presente
-                a.setModuloList(moduloRequestMapper.asEntityList(academyRequestDTO.getModuloRequestDTOList()));
-                a.setDiscenteList(discenteRequestMapper.asEntityList(academyRequestDTO.getDiscenteRequestDTOList()));
-                academyRepository.save(a);
-            } else
-                throw new AlreadyExistsException();
+            a.setModuloList(moduloRequestMapper.asEntityList(academyRequestDTO.getModuloRequestDTOList()));
+            a.setDiscenteList(discenteRequestMapper.asEntityList(academyRequestDTO.getDiscenteRequestDTOList()));
+            academyRepository.save(a);
         } else
             throw new ConflictBetweenAttributesException();
     }

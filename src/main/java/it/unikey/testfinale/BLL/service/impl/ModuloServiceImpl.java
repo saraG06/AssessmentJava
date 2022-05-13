@@ -12,6 +12,8 @@ import it.unikey.testfinale.BLL.mapper.implementation.response.DocenteResponseMa
 import it.unikey.testfinale.BLL.mapper.implementation.response.ModuloResponseMapper;
 import it.unikey.testfinale.BLL.service.abstraction.ModuloService;
 import it.unikey.testfinale.DAL.Entity.Modulo;
+import it.unikey.testfinale.DAL.Repository.AcademyRepository;
+import it.unikey.testfinale.DAL.Repository.DocenteRepository;
 import it.unikey.testfinale.DAL.Repository.ModuloRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -23,24 +25,23 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ModuloServiceImpl implements ModuloService {
 
-    private ModuloRepository moduloRepository;
-    private ModuloRequestMapper moduloRequestMapper;
-    private ModuloResponseMapper moduloResponseMapper;
-    private DocenteRequestMapper docenteRequestMapper;
-    private DocenteResponseMapper docenteResponseMapper;
-    private AcademyRequestMapper academyRequestMapper;
-    private AcademyResponseMapper academyResponseMapper;
+    private final ModuloRepository moduloRepository;
+    private final ModuloRequestMapper moduloRequestMapper;
+    private final ModuloResponseMapper moduloResponseMapper;
+    private final DocenteRepository docenteRepository;
+    private final DocenteRequestMapper docenteRequestMapper;
+    private final DocenteResponseMapper docenteResponseMapper;
+    private final AcademyRepository academyRepository;
+    private final AcademyRequestMapper academyRequestMapper;
+    private final AcademyResponseMapper academyResponseMapper;
 
     @Override
     public void saveModulo(ModuloRequestDTO moduloRequestDTO) throws AlreadyExistsException, ConflictBetweenAttributesException {
         if(moduloRequestDTO.getInizio().isBefore(moduloRequestDTO.getFine())) {       //la data di inizio deve essere prima della data di fine
             Modulo m = moduloRequestMapper.asEntity(moduloRequestDTO);
-            if(!moduloRepository.findAll().contains(m)) {       //non deve essere già presente
-                m.setDocente(docenteRequestMapper.asEntity(moduloRequestDTO.getDocenteRequestDTO()));
-                m.setAcademy(academyRequestMapper.asEntity(moduloRequestDTO.getAcademyRequestDTO()));
-                moduloRepository.save(m);
-            } else
-                throw new AlreadyExistsException();
+            m.setDocente(docenteRequestMapper.asEntity(moduloRequestDTO.getDocenteRequestDTO()));
+            m.setAcademy(academyRequestMapper.asEntity(moduloRequestDTO.getAcademyRequestDTO()));
+            moduloRepository.save(m);
         } else
             throw new ConflictBetweenAttributesException();
     }
