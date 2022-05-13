@@ -18,17 +18,17 @@ public interface AcademyRepository extends JpaRepository<Academy, Long> {
     @Query(value = "SELECT a FROM Academy a WHERE :modulo in a.moduli")
     List<Academy> getAcademyByModulo(@Param("modulo") Modulo modulo);
 
-    @Query(value = "SELECT a.nome, a.data_inizio, a.data_fine, m.nome, m.argomenti, d.persona.nome, d.persona.cognome" +
+    @Query(value = "SELECT a.nome, a.datainizio, a.datafine, m.nome, m.argomenti, d.persona.nome, d.persona.cognome" +
             "       FROM Academy a INNER JOIN Modulo m ON m.academy = a " +
             "                      INNER JOIN Discente d ON d.academy = a" +
             "       WHERE a.nome = :nome")
     Academy getAcademyInfo(@Param("nome") String nome);
-    @Query(value = "SELECT a FROM Academy a WHERE a.data_inizio >= :datainizio")
+    @Query(value = "SELECT a FROM Academy a WHERE a.datainizio >= :datainizio")
     List<Academy> getAcademyByDataInizio(@Param("datainizio") LocalDate inizio);
-    @Query(value = "SELECT a FROM Academy a WHERE a.data_fine <= :datafine")
+    @Query(value = "SELECT a FROM Academy a WHERE a.datafine <= :datafine")
     List<Academy> getAcademyByDataFine(@Param("datafine") LocalDate fine);
 
-    @Query(value = "SELECT a FROM Academy a WHERE a.data_inizio >= :datainizio AND a.data_fine <= :datafine")
+    @Query(value = "SELECT a FROM Academy a WHERE a.datainizio >= :datainizio AND a.datafine <= :datafine")
     List<Academy> getAcademyByIntervalloDate(@Param("datainizio") LocalDate inizio, @Param("datafine") LocalDate fine);
 
 }

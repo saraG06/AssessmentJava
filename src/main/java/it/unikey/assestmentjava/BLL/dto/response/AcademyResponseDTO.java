@@ -8,6 +8,7 @@ public class AcademyResponseDTO {
 
     private Long id;
     private String nome;
-    private LocalDate data_inizio;
-    private LocalDate data_fine;
+    private LocalDate datainizio;
+    private LocalDate datafine;
+
 }

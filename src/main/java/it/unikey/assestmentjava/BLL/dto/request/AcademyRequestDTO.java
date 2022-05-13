@@ -8,18 +8,18 @@ import java.time.LocalDate;
 public class AcademyRequestDTO {
 
     private String nome;
-    private LocalDate data_inizio;
-    private LocalDate data_fine;
+    private LocalDate datainizio;
+    private LocalDate datafine;
 
-    public void setData_inizio(LocalDate data_inizio) {
-        if(data_inizio.isAfter(LocalDate.now()) && data_inizio.isBefore(data_fine)) {
-            this.data_inizio = data_inizio;
+    public void setDatainizio(LocalDate datainizio) {
+        if(datainizio.isAfter(LocalDate.now()) && datainizio.isBefore(datafine)) {
+            this.datainizio = datainizio;
         }
     }
 
-    public void setData_fine(LocalDate data_fine) {
-        if(data_fine.isAfter(data_inizio)) {
-            this.data_fine = data_fine;
+    public void setDatafine(LocalDate datafine) {
+        if(datafine.isAfter(datainizio)) {
+            this.datafine = datafine;
         }
     }
 }

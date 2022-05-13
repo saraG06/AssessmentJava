@@ -8,4 +8,6 @@ public class DiscenteResponseDTO {
     private Long id;
     private PersonaResponseDTO personaResponseDTO;
     private AcademyResponseDTO academyResponseDTO;
+
+
 }

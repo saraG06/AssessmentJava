@@ -3,8 +3,6 @@ package it.unikey.assestmentjava.BLL.service.abstraction;
 import it.unikey.assestmentjava.BLL.dto.request.AcademyRequestDTO;
 import it.unikey.assestmentjava.BLL.dto.request.ModuloRequestDTO;
 import it.unikey.assestmentjava.BLL.dto.response.AcademyResponseDTO;
-import it.unikey.assestmentjava.DAL.entity.Academy;
-import org.springframework.data.repository.query.Param;
 
 import java.time.LocalDate;
 import java.util.List;

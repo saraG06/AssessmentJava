@@ -18,14 +18,15 @@ public class Academy {
     private String nome;
     @Column(name = "datainizio", nullable = false)
     @ApiModelProperty(notes = "Data di inizio Academy", example = "YY-MM-DD", required = true)
-    private LocalDate data_inizio;
+    private LocalDate datainizio;
     @Column(name = "datafine", nullable = false)
     @ApiModelProperty(notes = "Data di fine Academy, deve essere antecedente a quella di inizio", example = "YY-MM-DD", required = true)
-    private LocalDate data_fine;
+    private LocalDate datafine;
     @OneToMany(mappedBy = "academy")
     @ApiModelProperty(notes = "Questa è una relazione OneToMany")
     private List<Modulo> moduli;
     @OneToMany(mappedBy = "academy")
     @ApiModelProperty(notes = "Questa è una relazione OneToMany")
     private List<Discente> discenti;
+
 }
