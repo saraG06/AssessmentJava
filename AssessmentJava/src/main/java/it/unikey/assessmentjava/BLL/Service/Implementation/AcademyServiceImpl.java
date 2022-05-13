@@ -123,7 +123,7 @@ public class AcademyServiceImpl implements AcademyService {
     }
 
     @Override
-    public List<AcademyResponseDTO> findAllByDataInizioBetweenTwoDates(LocalDate data1, LocalDate data2) {
+    public List<AcademyResponseDTO> findAllByDataBetweenTwoDates(LocalDate data1, LocalDate data2) {
         List<Academy> academyList = academyRepository.findAllByDataInizioBetweenTwoDates(data1, data2);
         List<AcademyResponseDTO> academyResponseDTOList =  new ArrayList<>();
         for(Academy a : academyList){

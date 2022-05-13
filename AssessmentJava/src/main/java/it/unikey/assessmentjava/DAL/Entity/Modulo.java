@@ -71,6 +71,14 @@ public class Modulo {
         this.dataFine = dataFine;
     }
 
+    public Academy getAcademy() {
+        return academy;
+    }
+
+    public void setAcademy(Academy academy) {
+        this.academy = academy;
+    }
+
     @Override
     public String toString() {
         return "Modulo{" +

@@ -6,6 +6,7 @@ public class DiscenteRequestDTO {
     private String cognome;
     private String codiceFiscale;
 
+
     public DiscenteRequestDTO(String nome, String cognome, String codiceFiscale) {
         this.nome = nome;
         this.cognome = cognome;

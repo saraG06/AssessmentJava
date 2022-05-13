@@ -21,9 +21,9 @@ public interface AcademyService {
 
     AcademyResponseDTO findByIdWithDetails(Long id);
 
-    List<AcademyResponseDTO> findAcademyStartAfterData(@Param("data") LocalDate data);
+    List<AcademyResponseDTO> findAcademyStartAfterData(LocalDate data);
 
-    List<AcademyResponseDTO> findAcademyEndBeforeData(@Param("data") LocalDate data);
+    List<AcademyResponseDTO> findAcademyEndBeforeData(LocalDate data);
 
-    List<AcademyResponseDTO> findAllByDataInizioBetweenTwoDates(@Param("data1") LocalDate data1,@Param("data2") LocalDate data2);
+    List<AcademyResponseDTO> findAllByDataBetweenTwoDates(LocalDate data1,LocalDate data2);
 }

@@ -50,6 +50,14 @@ public class Discente {
         this.codiceFiscale = codiceFiscale;
     }
 
+    public Academy getAcademy() {
+        return academy;
+    }
+
+    public void setAcademy(Academy academy) {
+        this.academy = academy;
+    }
+
     @Override
     public String toString() {
         return "Discente{" +

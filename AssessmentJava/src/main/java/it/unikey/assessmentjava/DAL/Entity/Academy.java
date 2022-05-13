@@ -17,9 +17,9 @@ public class Academy {
     private LocalDate dataInizio;
     @Column
     private LocalDate dataFine;
-    @OneToMany(mappedBy = "academy",cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "academy",cascade = CascadeType.ALL)
     private List<Modulo> listaModuli;
-    @OneToMany(mappedBy = "academy",cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "academy",cascade = CascadeType.ALL)
     private List<Discente> listaDiscenti;
 
     public Long getId() {
