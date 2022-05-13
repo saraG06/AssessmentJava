@@ -30,4 +30,13 @@ public class DiscenteServiceImplementation implements DiscenteService {
         d.setAcademy(a);
         discenteRepository.save(d);
     }
+
+    @Override
+    public void deleteDiscenteById(Long id) {
+        Discente d = discenteRepository.getById(id);
+        if(d !=null)
+            discenteRepository.deleteById(id);
+        else
+            throw new NullPointerException();
+    }
 }

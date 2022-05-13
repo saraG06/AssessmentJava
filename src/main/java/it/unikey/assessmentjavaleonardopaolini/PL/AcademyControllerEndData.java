@@ -14,15 +14,15 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/academyStartData")
+@RequestMapping("/api/academyEndData")
 @CrossOrigin("http://localhost:8080")
-public class AcademyControllerStartData {
+public class AcademyControllerEndData {
 
     private final AcademyService academyService;
 
     @GetMapping(path="/{data}")
-    @ApiOperation(value = "GET di tutte le Academy con la data di inizio uguale o conseguente la data specificata")
-    public ResponseEntity<List<AcademyResponseDTO>> getAcademyStartData(@PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate data){
-        return new ResponseEntity<>(academyService.findAcademyStartData(data), HttpStatus.OK);
+    @ApiOperation(value = "GET di tutte le Academy con la data finale inferiore o uguale alla data specificata")
+    public ResponseEntity<List<AcademyResponseDTO>> getAcademyEndData(@PathVariable @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate data){
+        return new ResponseEntity<>(academyService.findAcademyEndData(data), HttpStatus.OK);
     }
 }

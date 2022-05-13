@@ -10,7 +10,6 @@ import it.unikey.assessmentjavaleonardopaolini.BLL.service.abstraction.AcademySe
 import it.unikey.assessmentjavaleonardopaolini.DAL.Entity.Academy;
 import it.unikey.assessmentjavaleonardopaolini.DAL.Entity.Modulo;
 import it.unikey.assessmentjavaleonardopaolini.DAL.Repository.AcademyRepository;
-import it.unikey.assessmentjavaleonardopaolini.DAL.Repository.ModuloRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -63,5 +62,26 @@ public class AcademyServiceImplementation implements AcademyService {
     public List<AcademyResponseDTO> findAcademyStartData(LocalDate data) {
         List<Academy> lista = academyRepository.getAcademyStartData(data);
         return academyResponseMapper.asDTOList(lista);
+    }
+
+    @Override
+    public List<AcademyResponseDTO> findAcademyEndData(LocalDate data) {
+        List<Academy> lista = academyRepository.getAcademyEndData(data);
+        return academyResponseMapper.asDTOList(lista);
+    }
+
+    @Override
+    public List<AcademyResponseDTO> findAcademyStartAndEndBetween(LocalDate datafine, LocalDate datainizio) {
+        List<Academy> lista = academyRepository.getAcademyEndData(datafine,datainizio);
+        return academyResponseMapper.asDTOList(lista);
+    }
+
+    @Override
+    public void deleteAcademyById(Long id) {
+        Academy a = academyRepository.getById(id);
+        if(a !=null)
+            academyRepository.deleteById(id);
+        else
+            throw new NullPointerException();
     }
 }

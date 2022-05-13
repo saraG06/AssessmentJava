@@ -21,5 +21,10 @@ public interface AcademyService {
 
     List<AcademyResponseDTO> findAcademyStartData(LocalDate data);
 
+    List<AcademyResponseDTO> findAcademyEndData(LocalDate data);
+
+    List<AcademyResponseDTO> findAcademyStartAndEndBetween(LocalDate datafine, LocalDate datainizio);
+
+    void deleteAcademyById (Long id);
 
 }

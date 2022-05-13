@@ -35,4 +35,16 @@ public class ModuloController {
     public ResponseEntity<List<ModuloResponseDTO>>  getAllModulo(){
         return new ResponseEntity<>(moduloService.findAllModulo(),HttpStatus.OK);
     }
+
+    @PutMapping(path="/{id}")
+    @ApiOperation(value = "Rimozione di un Modulo tramite ID")
+    public ResponseEntity<Void> deleteAziendaById(@PathVariable Long id){
+
+        try {
+            moduloService.deleteModuloById(id);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (NullPointerException n){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
 }

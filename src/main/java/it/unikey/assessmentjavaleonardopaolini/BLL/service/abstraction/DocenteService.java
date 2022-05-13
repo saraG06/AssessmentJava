@@ -5,4 +5,6 @@ import it.unikey.assessmentjavaleonardopaolini.BLL.dto.request.DocenteRequestDTO
 public interface DocenteService {
 
     void saveDocente(DocenteRequestDTO docenteRequestDTO);
+
+    void deleteDocenteById (Long id);
 }

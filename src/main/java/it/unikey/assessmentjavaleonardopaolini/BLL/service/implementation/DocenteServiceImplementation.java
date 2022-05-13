@@ -23,4 +23,14 @@ public class DocenteServiceImplementation implements DocenteService {
         Docente d = docenteRequestMapper.asEntity(docenteRequestDTO);
         docenteRepository.save(d);
     }
+
+    @Override
+    public void deleteDocenteById(Long id) {
+        Docente d = docenteRepository.getById(id);
+        if(d !=null)
+            docenteRepository.deleteById(id);
+        else
+            throw new NullPointerException();
+
+    }
 }

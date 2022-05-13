@@ -1,7 +1,7 @@
 package it.unikey.assessmentjavaleonardopaolini.PL;
 
 import io.swagger.annotations.ApiOperation;
-import it.unikey.assessmentjavaleonardopaolini.BLL.dto.request.ModuloRequestDTO;
+import it.unikey.assessmentjavaleonardopaolini.BLL.dto.request.ModuloRequestDTOCreazione;
 import it.unikey.assessmentjavaleonardopaolini.BLL.service.abstraction.ModuloService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -16,17 +16,17 @@ public class ModuloControllerCreazione {
 
     private final ModuloService moduloService;
 
-     /*
+
     @PostMapping
     @ApiOperation(value = "Inserimento di un Modulo con relazioni già esistenti nel DB")
-    public ResponseEntity<Void> save(@RequestBody ModuloRequestDTO moduloRequestDTO){
+    public ResponseEntity<Void> save(@RequestBody ModuloRequestDTOCreazione moduloRequestDTOCreazione){
         try {
-            moduloService.saveModulo(moduloRequestDTO);
+            moduloService.saveModuloCreazione(moduloRequestDTOCreazione);
             return new ResponseEntity<>(HttpStatus.CREATED);
         }catch (NullPointerException n){
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
-      */
+
 }

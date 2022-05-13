@@ -26,4 +26,16 @@ public class DocenteController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+
+    @PutMapping(path="/{id}")
+    @ApiOperation(value = "Rimozione di un Docente tramite ID")
+    public ResponseEntity<Void> deleteDocenteById(@PathVariable Long id){
+
+        try {
+            docenteService.deleteDocenteById(id);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (NullPointerException n){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
 }

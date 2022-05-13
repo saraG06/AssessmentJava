@@ -5,4 +5,6 @@ import it.unikey.assessmentjavaleonardopaolini.BLL.dto.request.DiscenteRequestDT
 public interface DiscenteService {
 
     void saveDiscente(DiscenteRequestDTO discenteRequestDTO);
+
+    void deleteDiscenteById (Long id);
 }

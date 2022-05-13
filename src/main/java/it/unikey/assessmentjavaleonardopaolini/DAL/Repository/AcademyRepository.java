@@ -22,8 +22,14 @@ public interface AcademyRepository extends JpaRepository<Academy,Long> {
     @Query("SELECT m FROM Academy  a INNER JOIN Modulo m ON a.id = m.academy.id INNER JOIN Docente d ON m.docente.id = d.id WHERE a.id=:id")
     Modulo getAcademyInfo(@Param("id") Long id);
 
-    @Query("SELECT a FROM Academy a WHERE a.datainizio>=:data")
+    @Query("SELECT a FROM Academy a WHERE a.datainizio<=:data")
     List<Academy> getAcademyStartData(@Param("data") LocalDate data);
+
+    @Query("SELECT a FROM Academy a WHERE a.datafine>=:data")
+    List<Academy> getAcademyEndData(@Param("data") LocalDate data);
+
+    @Query("SELECT a FROM Academy a WHERE a.datafine>=:datafine AND a.datainizio<=:datainizio")
+    List<Academy> getAcademyEndData(@Param("datafine") LocalDate datafine,@Param("datainizio") LocalDate datainizio );
 
 
 

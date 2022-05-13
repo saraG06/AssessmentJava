@@ -26,4 +26,16 @@ public class DiscenteController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+
+    @PutMapping(path="/{id}")
+    @ApiOperation(value = "Rimozione di un Discente tramite ID")
+    public ResponseEntity<Void> deleteDiscenteById(@PathVariable Long id){
+
+        try {
+            discenteService.deleteDiscenteById(id);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (NullPointerException n){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
 }

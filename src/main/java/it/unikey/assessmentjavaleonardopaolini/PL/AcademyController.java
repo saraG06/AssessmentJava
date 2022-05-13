@@ -43,4 +43,16 @@ public class AcademyController {
         return new ResponseEntity<>(academyService.findAllAcademy(),HttpStatus.OK);
     }
 
+    @PutMapping(path="/{id}")
+    @ApiOperation(value = "Rimozione dell'Academy tramite ID")
+    public ResponseEntity<Void> deleteAcademyById(@PathVariable Long id){
+
+        try {
+            academyService.deleteAcademyById(id);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (NullPointerException n){
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
 }

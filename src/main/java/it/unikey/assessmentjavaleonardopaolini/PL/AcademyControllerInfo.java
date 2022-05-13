@@ -1,9 +1,6 @@
 package it.unikey.assessmentjavaleonardopaolini.PL;
 
 import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
-import it.unikey.assessmentjavaleonardopaolini.BLL.dto.response.AcademyResponseDTO;
 import it.unikey.assessmentjavaleonardopaolini.BLL.dto.response.ModuloResponseDTO;
 import it.unikey.assessmentjavaleonardopaolini.BLL.service.abstraction.AcademyService;
 import lombok.RequiredArgsConstructor;
