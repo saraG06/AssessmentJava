@@ -23,10 +23,10 @@ public class Modulo {
     @JoinColumn(name = "docente_id", nullable = false)
     @ApiModelProperty(notes = "Richiede un Docente, è una ManyToOne", required = true)
     private Docente docente;
-    @Column(name = "data_inizio")
+    @Column(name = "datainizio")
     @ApiModelProperty(notes = "Data di inizio Modulo")
     private LocalDate data_inizio;
-    @Column(name = "data_fine")
+    @Column(name = "datafine")
     @ApiModelProperty(notes = "Data di fine modulo, non può essere antecedente alla data di inizio")
     private LocalDate data_fine;
     @ManyToOne(cascade = CascadeType.ALL)

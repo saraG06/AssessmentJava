@@ -15,7 +15,7 @@ public class ModuloRequestDTO {
     private AcademyRequestDTO academyRequestDTO;
 
     public void setData_inizio(LocalDate data_inizio) {
-        if(data_inizio.isAfter(LocalDate.now())) {
+        if(data_inizio.isAfter(LocalDate.now()) && data_inizio.isBefore(data_fine)) {
             this.data_inizio = data_inizio;
         }
     }

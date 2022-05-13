@@ -16,10 +16,10 @@ public class Academy {
     @Column(name = "nome", nullable = false)
     @ApiModelProperty(notes = "Nome dell'Academy", required = true)
     private String nome;
-    @Column(name = "data_inizio", nullable = false)
+    @Column(name = "datainizio", nullable = false)
     @ApiModelProperty(notes = "Data di inizio Academy", example = "YY-MM-DD", required = true)
     private LocalDate data_inizio;
-    @Column(name = "data_fine", nullable = false)
+    @Column(name = "datafine", nullable = false)
     @ApiModelProperty(notes = "Data di fine Academy, deve essere antecedente a quella di inizio", example = "YY-MM-DD", required = true)
     private LocalDate data_fine;
     @OneToMany(mappedBy = "academy")
