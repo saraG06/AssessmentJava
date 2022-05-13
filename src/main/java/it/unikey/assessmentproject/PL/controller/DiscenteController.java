@@ -1,5 +1,8 @@
 package it.unikey.assessmentproject.PL.controller;
 
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import it.unikey.assessmentproject.BLL.DTO.request.DiscenteRequestDTO;
 import it.unikey.assessmentproject.BLL.DTO.response.DiscenteResponseDTO;
 import it.unikey.assessmentproject.BLL.service.Exception.EntityNotFoundException;
@@ -20,6 +23,9 @@ public class DiscenteController {
     private final DiscenteService discenteService;
 
     @PostMapping
+    @ApiOperation(value = "metodo per aggiungere un discente")
+    @ApiResponses(value ={
+            @ApiResponse(code = 201, message = "ha creato effettivamente la risorsa")})
     public ResponseEntity<Void> save(@RequestBody DiscenteRequestDTO discenteRequestDTO) {
 
         discenteService.saveDiscente(discenteRequestDTO);
@@ -29,6 +35,10 @@ public class DiscenteController {
 
 
     @GetMapping(path = "/{id}")
+    @ApiOperation(value = "metodo per cercare un discente dall'id")
+    @ApiResponses(value ={
+            @ApiResponse(code = 200, message = "ha trovato la risorsa"),
+            @ApiResponse(code = 404, message = "non esiste questo id nel db")})
     public ResponseEntity<DiscenteResponseDTO> getById(@PathVariable Long id){
 
         try {
@@ -41,6 +51,10 @@ public class DiscenteController {
     }
 
     @GetMapping
+    @ApiOperation(value = "metodo per ottenere tutti i discenti")
+    @ApiResponses(value ={
+            @ApiResponse(code = 201, message = "ha trovato la risorsa")
+    })
     public ResponseEntity<List<DiscenteResponseDTO>> getAll(){
 
         return new ResponseEntity<>(discenteService.getAllDiscente(), HttpStatus.OK);
@@ -48,6 +62,10 @@ public class DiscenteController {
     }
 
     @DeleteMapping(path = "/{id}")
+    @ApiOperation(value = "metodo per cancellare un discente dall'id")
+    @ApiResponses(value ={
+            @ApiResponse(code = 201, message = "ha cancellato la risorsa"),
+            @ApiResponse(code = 404, message = "non esiste questo id nel db")})
     public ResponseEntity<Void> deleteById(@PathVariable Long id){
         try {
             discenteService.deleteDiscenteById(id);

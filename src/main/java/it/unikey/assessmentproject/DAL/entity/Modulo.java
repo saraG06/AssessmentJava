@@ -1,5 +1,6 @@
 package it.unikey.assessmentproject.DAL.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.yaml.snakeyaml.events.DocumentEndEvent;
 
 import javax.persistence.*;
@@ -15,8 +16,10 @@ public class Modulo {
     @Column(name = "nome")
     private String nome;
     @Column(name = "inizio_modulo")
+    @JsonFormat(pattern="yyyy-MM-dd")
     private LocalDate inizioModulo;
     @Column(name = "fine_modulo")
+    @JsonFormat(pattern="yyyy-MM-dd")
     private LocalDate fineModulo;
     @ManyToOne(fetch = FetchType.LAZY,cascade = {CascadeType.MERGE,CascadeType.PERSIST})
     @JoinColumn(name = "docente_id")

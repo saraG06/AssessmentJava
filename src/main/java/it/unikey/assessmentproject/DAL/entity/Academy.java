@@ -1,5 +1,7 @@
 package it.unikey.assessmentproject.DAL.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
@@ -14,8 +16,10 @@ public class Academy {
     @Column(name = "nome")
     private String nome;
     @Column(name = "inizio")
+    @JsonFormat(pattern="yyyy-MM-dd")
     private LocalDate inizio;
     @Column(name = "fine")
+    @JsonFormat(pattern="yyyy-MM-dd")
     private LocalDate fine;
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "academy")
     private List<Discente> discenteList;
