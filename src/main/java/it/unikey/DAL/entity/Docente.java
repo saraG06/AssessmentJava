@@ -22,4 +22,7 @@ public class Docente implements Serializable {
 
     @ManyToOne(cascade = CascadeType.ALL)
     private Modulo modulo;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    private Academy academy;
 }

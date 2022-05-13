@@ -8,4 +8,5 @@ public class DocenteResponseDTO {
     private String nome;
     private String cognome;
     private ModuloResponseDTO moduloResponseDTO;
+    private AcademyResponseDTO academyResponseDTO;
 }

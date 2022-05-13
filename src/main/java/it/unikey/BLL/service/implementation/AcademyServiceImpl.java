@@ -43,7 +43,7 @@ public class AcademyServiceImpl implements AcademyService {
     }
 
     @Override
-    public AcademyResponseDTO findbyId(Long id) throws IdNotFoundException {
+    public AcademyResponseDTO findById(Long id) throws IdNotFoundException {
         Academy a = null;
         if (academyRepository.findById(id).isPresent()) {
             a = academyRepository.findById(id).get();

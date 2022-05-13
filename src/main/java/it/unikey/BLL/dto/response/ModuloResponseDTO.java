@@ -23,4 +23,5 @@ public class ModuloResponseDTO {
     private LocalDate dataFine;
 
     private AcademyResponseDTO academyResponseDTO;
+
 }
