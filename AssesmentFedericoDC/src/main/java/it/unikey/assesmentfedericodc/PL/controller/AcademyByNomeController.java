@@ -20,7 +20,7 @@ public class AcademyByNomeController {
 
     private final AcademyService academyService;
 
-    @GetMapping(path= "/{NOME}")      //le graffe indicano una variabile
+    @GetMapping(path= "/{nome}")      //le graffe indicano una variabile
     @ApiOperation(value= "metodo per cercare un academy a partire da UN NOME")
     @ApiResponses(value= {
             @ApiResponse(code= 200, message= "request received and executed"),

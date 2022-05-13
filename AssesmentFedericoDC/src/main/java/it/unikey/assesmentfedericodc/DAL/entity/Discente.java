@@ -21,8 +21,8 @@ public class Discente {
     @Column(name = "cognome")
     @ApiModelProperty(notes= "cognome discente", example= "Rossi", required = true)
     private String cognome;
-    @Column(name = "codiceFiscale")
-    @ApiModelProperty(notes= "CF discente", example= "DFRESV86H13Y603P", required = true)
+    @Column(name = "codiceFiscale" , length=16)
+    @ApiModelProperty(notes= "CF discente", example= "DFRESV86H13Y603P" , required = true)
     private String codiceFiscale;
     @ManyToOne(cascade= CascadeType.ALL)
     @JoinColumn(name="academy_id" )

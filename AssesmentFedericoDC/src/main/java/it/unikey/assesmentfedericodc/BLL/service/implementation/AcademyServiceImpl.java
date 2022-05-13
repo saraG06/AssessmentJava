@@ -1,10 +1,14 @@
 package it.unikey.assesmentfedericodc.BLL.service.implementation;
 
 import it.unikey.assesmentfedericodc.BLL.dto.request.AcademyRequestDTO;
+import it.unikey.assesmentfedericodc.BLL.dto.request.DiscenteRequestDTO;
+import it.unikey.assesmentfedericodc.BLL.dto.request.ModuloRequestDTO;
 import it.unikey.assesmentfedericodc.BLL.dto.response.AcademyResponseDTO;
 import it.unikey.assesmentfedericodc.BLL.mapper.implementation.*;
 import it.unikey.assesmentfedericodc.BLL.service.abstraction.AcademyService;
 import it.unikey.assesmentfedericodc.DAL.entity.Academy;
+import it.unikey.assesmentfedericodc.DAL.entity.Discente;
+import it.unikey.assesmentfedericodc.DAL.entity.Modulo;
 import it.unikey.assesmentfedericodc.DAL.repository.AcademyRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -26,8 +30,21 @@ public class AcademyServiceImpl implements AcademyService {
     @Override
     public void saveAcademy(AcademyRequestDTO academyRequestDTO) {
         Academy a = academyRequestMapper.asEntity(academyRequestDTO);
-        a.setDiscenti(discenteRequestMapper.asEntityList(academyRequestDTO.getDiscenteRequestDTOList()));
-        a.setModuli(moduloRequestMapper.asEntityList(academyRequestDTO.getModuloRequestDTOList()));
+//        a.setDiscenti(discenteRequestMapper.asEntityList(academyRequestDTO.getDiscenteRequestDTOList()));
+//        a.setModuli(moduloRequestMapper.asEntityList(academyRequestDTO.getModuloRequestDTOList()));
+        a.setDiscenti(new ArrayList<>());
+        a.setModuli(new ArrayList<>());
+        for(DiscenteRequestDTO d : academyRequestDTO.getDiscenteRequestDTOList()){
+            Discente discente = discenteRequestMapper.asEntity(d);
+            discente.setAcademy(a);
+            a.getDiscenti().add(discente);
+        }
+        for(ModuloRequestDTO m : academyRequestDTO.getModuloRequestDTOList()){
+            Modulo modulo = moduloRequestMapper.asEntity(m) ;
+            modulo.setAcademy(a);
+            a.getModuli().add(modulo);
+        }
+
         academyRepository.save(a);
     }
 

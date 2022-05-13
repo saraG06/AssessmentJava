@@ -12,4 +12,5 @@ public class DiscenteRequestDTO implements Serializable {
     private String codiceFiscale;
 
     private AcademyRequestDTO academyRequestDTO;
+//    private Double academy_id ;
 }

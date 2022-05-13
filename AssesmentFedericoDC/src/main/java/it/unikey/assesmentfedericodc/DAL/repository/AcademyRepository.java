@@ -12,11 +12,11 @@ import java.util.List;
 public interface AcademyRepository extends JpaRepository<Academy,Long> {
 
     //funzionera?
-    @Query(value = "SELECT a FROM Accademy a  WHERE a.nome LIKE '%:nome%' ", nativeQuery = true)
+    @Query(value = "SELECT * FROM Academy a  WHERE a.nome LIKE '%'+:nome+'%' ", nativeQuery = true)
     List<Academy> findByNome(@Param("nome") String nome);
 
-    @Query(value = "SELECT DISTINCT a FROM Accademy a, Modulo m  " +
-            "WHERE m.academy = academy AND m.nome LIKE '%:nomeModulo%' ", nativeQuery = true)
+    @Query(value = "SELECT  a FROM Academy a, Modulo m  " +
+            "WHERE m.academy= a AND m.nome LIKE '%'+:nome+'%' ")
     List<Academy> findByModulo(@Param("nome") String nomeModulo);
 
 }

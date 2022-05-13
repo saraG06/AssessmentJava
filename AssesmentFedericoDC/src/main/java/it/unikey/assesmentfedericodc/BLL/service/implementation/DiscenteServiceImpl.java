@@ -36,7 +36,7 @@ public class DiscenteServiceImpl implements DiscenteService {
     public DiscenteResponseDTO findById(Long id) {
         Discente d = discenteRepository.findById(id).get();
         DiscenteResponseDTO dr = discenteResponseMapper.asDTO(d);
-        dr.setAcademyResponseDTO(academyResponseMapper.asDTO(d.getAcademy()));
+     //   dr.setAcademyResponseDTO(academyResponseMapper.asDTO(d.getAcademy()));
         return dr;
     }
 
@@ -51,7 +51,7 @@ public class DiscenteServiceImpl implements DiscenteService {
         List<DiscenteResponseDTO> drList =  new ArrayList<>();
         for(Discente d : dList){
             DiscenteResponseDTO dr = discenteResponseMapper.asDTO(d);
-            dr.setAcademyResponseDTO(academyResponseMapper.asDTO(d.getAcademy()));
+       //     dr.setAcademyResponseDTO(academyResponseMapper.asDTO(d.getAcademy()));
             drList.add(dr);
         }
         return drList;

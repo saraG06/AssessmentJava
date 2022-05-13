@@ -14,4 +14,5 @@ public class ModuloRequestDTO implements Serializable {
     private LocalDate dataInizio;
     private LocalDate dataFine;
     private AcademyRequestDTO academyRequestDTO;
+//    private Double academy_id ;
 }

@@ -37,7 +37,7 @@ public class ModuloServiceImpl implements ModuloService {
     public ModuloResponseDTO findById(Long id) {
         Modulo m = moduloRepository.findById(id).get();
         ModuloResponseDTO mr = moduloResponseMapper.asDTO(m);
-        mr.setAcademyResponseDTO(academyResponseMapper.asDTO(m.getAcademy()));
+    //    mr.setAcademyResponseDTO(academyResponseMapper.asDTO(m.getAcademy()));
         return mr;
     }
 
@@ -52,7 +52,7 @@ public class ModuloServiceImpl implements ModuloService {
         List<ModuloResponseDTO> mrList =  new ArrayList<>();
         for(Modulo m : mList){
             ModuloResponseDTO cr = moduloResponseMapper.asDTO(m);
-            cr.setAcademyResponseDTO(academyResponseMapper.asDTO(m.getAcademy()));
+        //    cr.setAcademyResponseDTO(academyResponseMapper.asDTO(m.getAcademy()));
             mrList.add(cr);
         }
         return mrList;
