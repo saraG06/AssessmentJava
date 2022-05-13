@@ -6,5 +6,5 @@ import it.unikey.assessmentjava.DAL.Entity.Discenti;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
-public interface DiscentiRequestMapper extends GenericRequestMapper<Discenti, DiscentiRequestDTO> {
+public interface DiscentiRequestMapper extends GenericRequestMapper<Discenti,DiscentiRequestDTO>{
 }

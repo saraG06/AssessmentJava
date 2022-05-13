@@ -10,4 +10,6 @@ public interface AcademyService {
     AcademyResponseDTO findById(Long id);
     void deleteById(Long id);
     List<AcademyResponseDTO> findAllAcademy();
+    List<AcademyResponseDTO> findByNome(String nome);
+    List<AcademyResponseDTO> findByModulo(String nomeModulo) ;
 }
