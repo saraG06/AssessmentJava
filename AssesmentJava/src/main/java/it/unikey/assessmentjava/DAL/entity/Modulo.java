@@ -10,13 +10,17 @@ public class Modulo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(name = "nome")
     private String nome;
+    @Column(name = "argomenti")
     private String argomenti;
 
     @ManyToOne(cascade = CascadeType.ALL)
     private Docente docente;
 
+    @Column(name = "datadiinizio")
     private LocalDate datadiInizio;
+    @Column(name = "datadifine")
     private LocalDate datadiFine;
 
     @ManyToOne(cascade = CascadeType.ALL)

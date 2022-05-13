@@ -9,8 +9,11 @@ public class Discente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(name = "codicefiscale")
     private String codiceFiscale;
+    @Column(name = "nome")
     private String nome;
+    @Column(name = "cognome")
     private String cognome;
 
     @ManyToOne(cascade = CascadeType.ALL)
