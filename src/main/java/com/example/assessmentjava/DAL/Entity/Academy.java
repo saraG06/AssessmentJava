@@ -12,9 +12,9 @@ public class Academy {
     private Long id;
     @Column(name = "nome", nullable = false)
     private String nome;
-    @Column(name = "dataInizio", nullable = false)
+    @Column(name = "dataInizio")
     private LocalDate dataInizio;
-    @Column(name = "dataFine", nullable = false)
+    @Column(name = "dataFine")
     private LocalDate dataFine;
     @OneToMany(mappedBy = "academy")
     private List<Modulo> moduloList;

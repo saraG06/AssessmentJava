@@ -3,6 +3,7 @@ package com.example.assessmentjava.BLL.service.impl;
 import com.example.assessmentjava.BLL.dto.request.DiscenteRequestDTO;
 import com.example.assessmentjava.BLL.dto.response.DiscenteResponseDTO;
 import com.example.assessmentjava.BLL.mapper.implementation.AcademyRequestMapper;
+import com.example.assessmentjava.BLL.mapper.implementation.AcademyResponseMapper;
 import com.example.assessmentjava.BLL.mapper.implementation.DiscenteRequestMapper;
 import com.example.assessmentjava.BLL.mapper.implementation.DiscenteResponseMapper;
 import com.example.assessmentjava.BLL.service.abstraction.DiscenteService;
@@ -12,6 +13,7 @@ import com.example.assessmentjava.DAL.Repository.DiscenteRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -22,6 +24,7 @@ public class DiscenteServiceImpl implements DiscenteService {
     private final DiscenteRequestMapper discenteRequestMapper;
     private final DiscenteResponseMapper discenteResponseMapper;
     private final AcademyRequestMapper academyRequestMapper;
+    private final AcademyResponseMapper academyResponseMapper;
     @Override
     public void saveDiscente(DiscenteRequestDTO discenteRequestDTO) {
         Discente d = discenteRequestMapper.asEntity(discenteRequestDTO);
@@ -53,6 +56,12 @@ public class DiscenteServiceImpl implements DiscenteService {
     @Override
     public List<DiscenteResponseDTO> findAllDiscenti() {
         List<Discente> list = discenteRepository.findAll();
-        return discenteResponseMapper.asDTOList(list);
+        List<DiscenteResponseDTO> discenteResponseDTOList =  new ArrayList<>();
+        for(Discente d : list){
+            DiscenteResponseDTO discenteResponseDTO = discenteResponseMapper.asDTO(d);
+            academyResponseMapper.asDTO(d.getAcademy());
+            discenteResponseDTOList.add(discenteResponseDTO);
+        }
+        return discenteResponseDTOList;
     }
 }
