@@ -1,5 +1,7 @@
 package it.unikey.assessmentjava.DAL.Entity;
 
+import io.swagger.annotations.ApiModelProperty;
+
 import javax.persistence.*;
 
 @Entity
@@ -8,18 +10,23 @@ public class Discenti {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @ApiModelProperty(notes= "id_discente", example= "1", required = true)
     Long id_discente;
 
     @Column(name = "nome")
+    @ApiModelProperty(notes= "nome_discente", example= "2", required = true)
     private String nome;
 
     @Column(name = "cognome")
+    @ApiModelProperty(notes= "cognome_discente", example= "3", required = true)
     private String cognome;
 
     @Column(name = "codice_fiscale")
+    @ApiModelProperty(notes= "codice_fiscale", example= "4", required = true)
     private String codice_fiscale;
 
     @ManyToOne(cascade = CascadeType.ALL)
+    @ApiModelProperty(notes= "academy", example= "5", required = true)
     private Academy academy;
 
     public Long getId_discente() {

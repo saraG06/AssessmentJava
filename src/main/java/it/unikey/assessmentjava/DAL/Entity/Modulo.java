@@ -1,5 +1,7 @@
 package it.unikey.assessmentjava.DAL.Entity;
 
+import io.swagger.annotations.ApiModelProperty;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 
@@ -9,21 +11,27 @@ public class Modulo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @ApiModelProperty(notes= "id_modulo", example= "1", required = true)
     Long id_modulo;
 
     @Column(name = "argomenti")
+    @ApiModelProperty(notes= "argomenti", example= "2", required = true)
     private String argomenti;
 
     @Column(name = "data_inizio_modulo")
+    @ApiModelProperty(notes= "data_inizio_modulo", example= "3", required = true)
     private LocalDate data_inizio_modulo;
 
     @Column(name = "data_fine")
+    @ApiModelProperty(notes= "data_fine_modulo", example= "4", required = true)
     private LocalDate data_fine_modulo;
 
     @ManyToOne(cascade = CascadeType.ALL)
+    @ApiModelProperty(notes= "docente", example= "5", required = true)
     private Docente docente;
 
     @ManyToOne(cascade = CascadeType.ALL)
+    @ApiModelProperty(notes= "academymodulo", example= "6", required = true)
     private Academy academymodulo;
 
     public Long getId_modulo() {

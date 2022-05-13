@@ -60,4 +60,9 @@ public class AcademyServiceImplementazioni implements AcademyService {
     public List<AcademyResponseDTO> findByModulo(String nomeModulo) {
         return findByModulo(nomeModulo);
     }
+
+    @Override
+    public List<AcademyResponseDTO> Dettagliacademy(Long id) {
+        return Dettagliacademy(id);
+    }
 }

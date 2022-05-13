@@ -1,5 +1,7 @@
 package it.unikey.assessmentjava.DAL.Entity;
 
+import io.swagger.annotations.ApiModelProperty;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -8,12 +10,15 @@ import java.util.List;
 public class Docente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @ApiModelProperty(notes= "id_docente", example= "1", required = true)
     Long id_docente;
 
     @Column(name = "nome")
+    @ApiModelProperty(notes= "nome_docente", example= "2", required = true)
     private String nome;
 
     @OneToMany(mappedBy = "docente")
+    @ApiModelProperty(notes= "moduli", example= "3", required = true)
     private List<Modulo> moduli;
 
     public Long getId_docente() {

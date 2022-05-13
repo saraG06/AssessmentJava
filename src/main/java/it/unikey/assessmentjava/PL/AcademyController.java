@@ -20,20 +20,23 @@ public class AcademyController {
     private final AcademyService academyService;
 
     @PostMapping
-    @ApiOperation(value = "getById", notes = "get academy by id")
-    @ApiResponses(value = {
-            @ApiResponse(code = 201, message = "Created the academy"),
-            @ApiResponse(code = 403, message = "No authorization to reach academy")})
+    @ApiOperation(value= "Metodo per aggiungere un'academy")
+    @ApiResponses(value= {
+            @ApiResponse(code= 200, message= "richiesta ricevuta ed eseguita"),
+            @ApiResponse(code= 201, message= "risorsa creata"),
+            @ApiResponse(code= 404, message= "pagina non trovata")
+    })
     public ResponseEntity<Void> save(@RequestBody AcademyRequestDTO academyRequestDTO) {
         academyService.saveAcademy(academyRequestDTO);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @GetMapping(path = "/{id}")
-    @ApiOperation(value = "getById", notes = "get academy by id")
-    @ApiResponses(value = {
-            @ApiResponse(code = 201, message = "Created the academy"),
-            @ApiResponse(code = 403, message = "No authorization to reach academy")})
+    @ApiOperation(value= "Metodo per cercare un'academy dall'id")
+    @ApiResponses(value= {
+            @ApiResponse(code= 200, message= "richiesta ricevuta ed eseguita"),
+            @ApiResponse(code= 404, message= "risorsa non trovata")
+    })
     public ResponseEntity<AcademyResponseDTO> getById(@PathVariable Long id){
         try {
             return new ResponseEntity<>(academyService.findById(id),HttpStatus.OK);
@@ -43,7 +46,11 @@ public class AcademyController {
     }
 
     @PutMapping(path = "/{id}")
-    @ApiOperation(value = "deleteAcademyById", notes = "delete academy by id")
+    @ApiOperation(value= "Metodo per cancellare un'academy dall'id")
+    @ApiResponses(value= {
+            @ApiResponse(code= 200, message= "richiesta ricevuta ed eseguita"),
+            @ApiResponse(code= 404, message= "risorsa non trovata")
+    })
     public ResponseEntity<AcademyResponseDTO> deleteAcademyById(@PathVariable Long id){
         academyService.deleteById(id);
         return new ResponseEntity<>(HttpStatus.OK);
