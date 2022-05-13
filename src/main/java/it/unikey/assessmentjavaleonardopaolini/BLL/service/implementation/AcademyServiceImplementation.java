@@ -29,6 +29,12 @@ public class AcademyServiceImplementation implements AcademyService {
     }
 
     @Override
+    public AcademyResponseDTO findAcademyPerNome(String nome) {
+        Academy a = academyRepository.getAcademyByNome(nome);
+        return academyResponseMapper.asDTO(a);
+    }
+
+    @Override
     public List<AcademyResponseDTO> findAllAcademy() {
         List<Academy> lista = academyRepository.findAll();
         return academyResponseMapper.asDTOList(lista);

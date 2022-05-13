@@ -6,4 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface AcademyRepository extends JpaRepository<Academy,Long> {
+
+    Academy getAcademyByNome(String nome);
 }

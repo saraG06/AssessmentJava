@@ -9,5 +9,7 @@ public interface AcademyService {
 
     void saveAcademy(AcademyRequestDTO academyRequestDTO);
 
+    AcademyResponseDTO findAcademyPerNome(String nome);
+
     List<AcademyResponseDTO> findAllAcademy();
 }
