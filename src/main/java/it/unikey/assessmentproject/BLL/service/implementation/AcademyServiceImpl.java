@@ -1,10 +1,12 @@
 package it.unikey.assessmentproject.BLL.service.implementation;
 
 import it.unikey.assessmentproject.BLL.DTO.request.AcademyRequestDTO;
+import it.unikey.assessmentproject.BLL.DTO.request.ModuloRequestDTO;
 import it.unikey.assessmentproject.BLL.DTO.response.AcademyResponseDTO;
 import it.unikey.assessmentproject.BLL.mapper.implementation.*;
 import it.unikey.assessmentproject.BLL.service.Exception.EntityNotFoundException;
 import it.unikey.assessmentproject.BLL.service.abstraction.AcademyService;
+import it.unikey.assessmentproject.DAL.entity.Academy;
 import it.unikey.assessmentproject.DAL.entity.Discente;
 
 import it.unikey.assessmentproject.DAL.entity.Modulo;
@@ -53,4 +55,16 @@ public class AcademyServiceImpl implements AcademyService {
     public List<AcademyResponseDTO> getAllAcademy() {
         return academyResponseMapper.asDTOList(academyRepository.findAll());
     }
+
+    @Override
+    public List<AcademyResponseDTO> getAllAcademyByNomeContaining(String nome) {
+        return academyResponseMapper.asDTOList((academyRepository.getAcademyByNomeContaining(nome)));
+    }
+
+    @Override
+    public List<AcademyResponseDTO> getAcademyByModuloListContainingModulo(ModuloRequestDTO moduloRequestDTO) {
+        return academyResponseMapper.asDTOList(academyRepository.getAcademyByModuloListContainingModulo(moduloRequestMapper.asEntity(moduloRequestDTO)));
+    }
+
+
 }
