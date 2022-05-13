@@ -10,9 +10,9 @@ public class Docente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
     private String name;
-    @Column(name = "cognome")
+    @Column(name = "cognome", nullable = false)
     private String cognome;
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "docente")
     List<Modulo> moduloList;

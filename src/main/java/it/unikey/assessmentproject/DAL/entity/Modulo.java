@@ -13,7 +13,7 @@ public class Modulo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "nome")
+    @Column(name = "nome", nullable = false)
     private String nome;
     @Column(name = "inizio_modulo")
     @JsonFormat(pattern="yyyy-MM-dd")

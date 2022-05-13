@@ -9,11 +9,11 @@ public class Discente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "codice_fiscale")
+    @Column(name = "codice_fiscale", nullable = false)
     private String codiceFiscale;
-    @Column(name = "nome")
+    @Column(name = "nome", nullable = false)
     private String nome;
-    @Column(name = "cognome")
+    @Column(name = "cognome", nullable = false)
     private String cognome;
     @ManyToOne(fetch = FetchType.LAZY,cascade = {CascadeType.MERGE,CascadeType.PERSIST})
     private Academy academy;

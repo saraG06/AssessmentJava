@@ -23,7 +23,9 @@ public class DiscenteServiceImpl implements DiscenteService {
     @Override
     public void saveDiscente(DiscenteRequestDTO discenteRequestDTO) {
 
-        discenteRepository.save(discenteRequestMapper.asEntity(discenteRequestDTO));
+        if(discenteRequestDTO.getCodiceFiscale().length() ==16) {
+            discenteRepository.save(discenteRequestMapper.asEntity(discenteRequestDTO));
+        }
 
     }
 
