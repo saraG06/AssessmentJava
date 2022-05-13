@@ -1,5 +1,7 @@
 package com.example.assessmentjava.DAL.Entity;
 
+import io.swagger.annotations.ApiModelProperty;
+
 import javax.persistence.*;
 
 @Table(name = "discente")
@@ -7,14 +9,19 @@ import javax.persistence.*;
 public class Discente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @ApiModelProperty(notes= "ID discente", example= "1", required = true)
     private Long id;
     @Column(name = "codiceFiscale", nullable = false)
+    @ApiModelProperty(notes= "codice fiscale", example= "SFNDRN92H24S34G" , required = true)
     private String codiceFiscale;
     @Column(name = "nome", nullable = false)
+    @ApiModelProperty(notes= "nome discente", example= "Peppone", required = true)
     private String nome;
     @Column(name = "cognome", nullable = false)
+    @ApiModelProperty(notes= "cognome discente", example= "konbayashi", required = true)
     private String cognome;
     @ManyToOne(cascade = {CascadeType.MERGE,CascadeType.PERSIST})
+    @ApiModelProperty(notes= "relazione con academy", required = true)
     @JoinColumn(name="academy_id")
     private Academy academy;
 

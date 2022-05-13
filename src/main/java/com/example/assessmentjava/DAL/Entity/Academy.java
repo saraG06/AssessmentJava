@@ -1,5 +1,7 @@
 package com.example.assessmentjava.DAL.Entity;
 
+import io.swagger.annotations.ApiModelProperty;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
@@ -9,16 +11,22 @@ import java.util.List;
 public class Academy {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @ApiModelProperty(notes= "ID academy", example= "1", required = true)
     private Long id;
     @Column(name = "nome", nullable = false)
+    @ApiModelProperty(notes= "nome academy", example= "java2022", required = true)
     private String nome;
     @Column(name = "dataInizio",nullable = false)
+    @ApiModelProperty(notes= "data inizio academy", example= "2022-15-28", required = true)
     private LocalDate dataInizio;
     @Column(name = "dataFine",nullable = false)
+    @ApiModelProperty(notes= "data fine academy", example= "2022-11-02", required = true)
     private LocalDate dataFine;
     @OneToMany(mappedBy = "academy",cascade = {CascadeType.MERGE,CascadeType.PERSIST})
+    @ApiModelProperty(notes = "relazione con lista Moduli")
     private List<Modulo> moduloList;
     @OneToMany(mappedBy = "academy",cascade = {CascadeType.MERGE,CascadeType.PERSIST})
+    @ApiModelProperty(notes = "relazione con lista Discenti")
     private List<Discente> discenteList;
 
     public Long getId() {
