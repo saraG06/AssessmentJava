@@ -1,8 +1,11 @@
 package it.unikey.BLL.service.implementation;
 
 import it.unikey.BLL.dto.request.AcademyRequestDTO;
+import it.unikey.BLL.dto.request.DiscenteRequestDTO;
+import it.unikey.BLL.dto.request.ModuloRequestDTO;
 import it.unikey.BLL.dto.response.AcademyResponseDTO;
 import it.unikey.BLL.exception.IdNotFoundException;
+import it.unikey.BLL.exception.NameNotFoundException;
 import it.unikey.BLL.mapper.implementation.request.AcademyRequestMapper;
 import it.unikey.BLL.mapper.implementation.request.DiscenteRequestMapper;
 import it.unikey.BLL.mapper.implementation.request.ModuloRequestMapper;
@@ -11,6 +14,8 @@ import it.unikey.BLL.mapper.implementation.response.DiscenteResponseMapper;
 import it.unikey.BLL.mapper.implementation.response.ModuloResponseMapper;
 import it.unikey.BLL.service.abstraction.AcademyService;
 import it.unikey.DAL.entity.Academy;
+import it.unikey.DAL.entity.Discente;
+import it.unikey.DAL.entity.Modulo;
 import it.unikey.DAL.repository.AcademyRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -33,8 +38,18 @@ public class AcademyServiceImpl implements AcademyService {
     @Override
     public void saveAcademy(AcademyRequestDTO academyRequestDTO) {
         Academy a = academyRequestMapper.asEntity(academyRequestDTO);
-        a.setDiscenteList(discenteRequestMapper.asEntityList(academyRequestDTO.getDiscenteRequestDTOList()));
-        a.setModuloList(moduloRequestMapper.asEntityList(academyRequestDTO.getModuloRequestDTOList()));
+        a.setDiscenteList(new ArrayList<>());
+        a.setModuloList(new ArrayList<>());
+        for(DiscenteRequestDTO d : academyRequestDTO.getDiscenteRequestDTOList()){
+            Discente discente = discenteRequestMapper.asEntity(d);
+            discente.setAcademy(a);
+            a.getDiscenteList().add(discente);
+        }
+        for(ModuloRequestDTO m : academyRequestDTO.getModuloRequestDTOList()){
+            Modulo modulo = moduloRequestMapper.asEntity(m) ;
+            modulo.setAcademy(a);
+            a.getModuloList().add(modulo);
+        }
         academyRepository.save(a);
     }
 
@@ -70,12 +85,20 @@ public class AcademyServiceImpl implements AcademyService {
     }
 
     @Override
-    public List<AcademyResponseDTO> findByNome(String nome) {
+    public List<AcademyResponseDTO> findByNome(String nome) throws NameNotFoundException {
         if(academyRepository.findByName(nome) != null){
             return academyResponseMapper.asDTOList(academyRepository.findByName(nome));
         }
         else
-            return null;
+            throw new NameNotFoundException("Il nome " + nome + " non è presente nel db");
+    }
+    @Override
+    public List<AcademyResponseDTO> findByModulo(String modulo) throws NameNotFoundException{
+        if(academyRepository.findByModulo(modulo) != null){
+            return academyResponseMapper.asDTOList(academyRepository.findByModulo(modulo));
+        }
+        else
+            throw new NameNotFoundException("Il nome " + modulo + " non è presente nel db");
     }
 
     @Override

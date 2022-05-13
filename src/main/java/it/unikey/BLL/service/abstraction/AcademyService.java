@@ -3,6 +3,7 @@ package it.unikey.BLL.service.abstraction;
 import it.unikey.BLL.dto.request.AcademyRequestDTO;
 import it.unikey.BLL.dto.response.AcademyResponseDTO;
 import it.unikey.BLL.exception.IdNotFoundException;
+import it.unikey.BLL.exception.NameNotFoundException;
 
 import java.util.List;
 
@@ -11,5 +12,6 @@ public interface AcademyService {
     AcademyResponseDTO findById(Long id) throws IdNotFoundException;
     void deleteAcademy(Long id) throws IdNotFoundException;
     List<AcademyResponseDTO> findAllAcademy();
-    List<AcademyResponseDTO> findByNome(String nome);
+    List<AcademyResponseDTO> findByNome(String nome) throws NameNotFoundException;
+    List<AcademyResponseDTO> findByModulo(String modulo) throws NameNotFoundException;
 }

@@ -14,6 +14,6 @@ public interface AcademyRepository extends JpaRepository<Academy, Long> {
     @Query("select a from Academy a where a.nome like %:nome%")
     List<Academy> findByName (@Param("nome") String nome);
 
-    @Query(value = "SELECT a  FROM academy a, discente di, docente do, modulo m WHERE a.id= m.academy_id AND a.id= di.academy_id AND do.id= m.docente_id  AND m.id= :modulo.id ", nativeQuery = true)
-    List<Academy> findByModulo(@Param("modulo") Modulo modulo);
+    @Query("SELECT  a FROM Academy a, Modulo m WHERE m.academy.id = a.id AND m.nome LIKE %:nome% ")
+    List<Academy> findByModulo(@Param("nome") String nome);
 }
