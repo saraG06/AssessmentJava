@@ -1,5 +1,8 @@
 package it.unikey.assessmentjava.PL.Controller;
 
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import it.unikey.assessmentjava.BLL.Dto.Request.ModuloRequestDTO;
 import it.unikey.assessmentjava.BLL.Service.Abstraction.ModuloService;
 import org.springframework.http.HttpStatus;
@@ -17,6 +20,11 @@ public class ModuloController {
         this.moduloService = moduloService;
     }
 
+    @ApiOperation(value = "Metodo per salvare un Modulo", notes = "Necessario un oggetto Modulo")
+    @ApiResponses(value = {
+            @ApiResponse(code = 201, message = "Modulo salvata correttamente"),
+            @ApiResponse(code = 401, message = "Inserimento non valido")
+    })
     @PostMapping
     ResponseEntity<Void> save(@RequestBody ModuloRequestDTO moduloRequestDTO){
         moduloService.saveModulo(moduloRequestDTO);

@@ -20,6 +20,8 @@ public class Modulo {
     private LocalDate dataInizio;
     @Column
     private LocalDate dataFine;
+    @ManyToOne
+    private Academy academy;
 
     public Long getId() {
         return id;

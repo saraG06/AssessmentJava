@@ -15,7 +15,8 @@ public class Discente {
     private String cognome;
     @Column
     private String codiceFiscale;
-
+    @ManyToOne
+    private Academy academy;
 
     public Long getId() {
         return id;

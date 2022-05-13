@@ -12,23 +12,24 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/academy/modulo")
+@RequestMapping("/api/academy/dettagli")
 @CrossOrigin("http://localhost:8080")
-public class GetAcademiesByModuloController {
+public class GetAcademyByIdWithDetailsController {
 
     private final AcademyService academyService;
 
-    public GetAcademiesByModuloController(AcademyService academyService) {
+    public GetAcademyByIdWithDetailsController(AcademyService academyService) {
         this.academyService = academyService;
     }
 
-    @ApiOperation(value = "Metodo per trovare tutte le Academy presenti che hanno la stringa modulo", notes = "Necessario inserire una stringa modulo, verranno prese tutte le academy che contengono, anche se solo in parte, la stringa inserita nel path")
+
+    @ApiOperation(value = "Metodo per trovare una Academy da un id inserito", notes = "Necessario inserire un Long id nel path che corrisponde con l'id dell'Academy da selezionare")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Academy trovata/e"),
-            @ApiResponse(code = 404, message = "Nessuna Academy trovata")
+            @ApiResponse(code = 404, message = "Nessuna Academy trovate")
     })
-    @GetMapping(path = "/{modulo}")
-    ResponseEntity<List<AcademyResponseDTO>> findByModulo(@PathVariable String modulo){
-        return new ResponseEntity<>(academyService.findAllByModulo(modulo), HttpStatus.FOUND);
+    @GetMapping(path = "/{id}")
+    ResponseEntity<AcademyResponseDTO> findAllWithDetails(@PathVariable Long id){
+        return new ResponseEntity<>(academyService.findByIdWithDetails(id), HttpStatus.FOUND);
     }
 }
