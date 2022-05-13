@@ -44,8 +44,8 @@ public class AcademyController {
             ResponseEntity<AcademyResponseDTO> a = new ResponseEntity<>(academyService.findById(id), HttpStatus.OK) ;
             return a;
         }catch(EntityNotFoundException e){
-            ResponseEntity<AcademyResponseDTO> a = new ResponseEntity<>(HttpStatus.NOT_FOUND) ;
-            return a;
+             ;
+            return  new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
 
 
