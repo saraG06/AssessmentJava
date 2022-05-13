@@ -9,6 +9,7 @@ import java.util.List;
 @Data
 
 public class AcademyResponseDto {
+    private Long id;
     private String nome;
     private LocalDate dataInizio;
     private LocalDate dataFine;

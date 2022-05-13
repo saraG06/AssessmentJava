@@ -1,5 +1,7 @@
 package com.example.assessmentjava.DAL.Entity;
 
+import io.swagger.annotations.ApiModelProperty;
+
 import javax.persistence.*;
 
 @Entity
@@ -9,6 +11,7 @@ public class Discente {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @ApiModelProperty(notes = "Id di discente", example = "1", required = true)
 
     private Long id;
 

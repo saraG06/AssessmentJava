@@ -6,7 +6,7 @@ import lombok.Data;
 import java.time.LocalDate;
 @Data
 public class ModuloResponseDto {
-
+    private Long id;
     private String nome;
     private String argomenti;
     private String docente;

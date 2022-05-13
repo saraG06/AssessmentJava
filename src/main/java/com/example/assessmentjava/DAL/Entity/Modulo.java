@@ -1,5 +1,7 @@
 package com.example.assessmentjava.DAL.Entity;
 
+import io.swagger.annotations.ApiModelProperty;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 
@@ -10,6 +12,7 @@ public class Modulo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @ApiModelProperty(notes = "Id di modulo", example = "1", required = true)
 
     private Long id;
 
