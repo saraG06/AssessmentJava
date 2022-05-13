@@ -20,11 +20,13 @@ public class DiscenteServiceImpl implements DiscenteService {
     private final DiscenteRepository discenteRepository;
     private final DiscenteRequestMapper discenteRequestMapper;
     private final DiscenteResponseMapper discenteResponseMapper;
+    private final AcademyRequestMapper academyRequestMapper;
 
     @Override
     public void saveDiscente(DiscenteRequestDTO discenteRequestDTO) throws NoSuchFieldException {
-        if(discenteRequestDTO.getCodiceFiscale().length() != 16){
+        if(discenteRequestDTO.getCodiceFiscale().length() == 16){
             Discente d = discenteRequestMapper.asEntity(discenteRequestDTO);
+            d.setAcademy(academyRequestMapper.asEntity(discenteRequestDTO.getAcademyRequestDTO()));
             discenteRepository.save(d);
         }else
             throw new NoSuchFieldException();

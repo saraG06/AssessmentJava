@@ -20,7 +20,7 @@ public class Academy {
 
     @OneToMany(mappedBy = "academy")
     private List<Modulo> moduli;
-    @OneToMany(mappedBy = "academy")
+    @OneToMany(mappedBy = "academy", cascade = CascadeType.ALL, orphanRemoval=true, fetch = FetchType.EAGER)
     private List<Discente> discenti;
 
     public Long getId() {

@@ -10,4 +10,5 @@ public class DiscenteResponseDTO {
     private String nome;
     private String cognome;
 
+    private AcademyResponseDTO academyResponseDTO;
 }

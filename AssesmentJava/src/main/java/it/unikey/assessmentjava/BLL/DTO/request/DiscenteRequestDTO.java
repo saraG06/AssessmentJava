@@ -10,4 +10,6 @@ public class DiscenteRequestDTO {
     private String nome;
     private String cognome;
 
+    private AcademyRequestDTO academyRequestDTO;
+
 }

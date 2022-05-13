@@ -1,6 +1,7 @@
 package it.unikey.assessmentjava.BLL.service.implementation;
 
 import it.unikey.assessmentjava.BLL.DTO.request.AcademyRequestDTO;
+import it.unikey.assessmentjava.BLL.DTO.request.DiscenteRequestDTO;
 import it.unikey.assessmentjava.BLL.DTO.response.AcademyResponseDTO;
 import it.unikey.assessmentjava.BLL.mapper.implementation.AcademyRequestMapper;
 import it.unikey.assessmentjava.BLL.mapper.implementation.AcademyResponseMapper;
@@ -27,7 +28,7 @@ public class AcademyServiceImpl implements AcademyService {
     public void saveAcademy(AcademyRequestDTO academyRequestDTO) {
         Academy a = academyRequestMapper.asEntity(academyRequestDTO);
         a.setDiscenti(discenteRequestMapper.asEntityList(academyRequestDTO.getDiscenteRequestDTOList()));
-        academyRepository.save(a);
+            academyRepository.save(a);
     }
 
     @Override

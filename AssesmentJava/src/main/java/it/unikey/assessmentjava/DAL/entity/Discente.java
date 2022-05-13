@@ -16,7 +16,7 @@ public class Discente {
     @Column(name = "cognome")
     private String cognome;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.DETACH)
     private Academy academy;
 
     public Long getId() {
