@@ -26,7 +26,7 @@ public interface AcademyRepository extends JpaRepository<Academy, Long> {
             "AND m.id= :modulo.id", nativeQuery = true)
     List<Academy> findByModulo(@Param("modulo") Modulo modulo);
 
-    //visualizzare il dettaglio dell'academy (info academy + info moduli + info discenti)
+    //visualizzare il dettaglio dell'academy filtrata tramite id (info academy + info moduli + info discenti)
     @Query(value= "SELECT * " +
             "FROM academy a, discente di, docente do, modulo m " +
             "WHERE a.id= m.academy_id AND a.id= di.academy_id AND do.id= m.docente_id " +

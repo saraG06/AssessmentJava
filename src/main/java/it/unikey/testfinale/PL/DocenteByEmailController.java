@@ -3,7 +3,6 @@ package it.unikey.testfinale.PL;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
-import it.unikey.testfinale.BLL.mapper.dto.response.DiscenteResponseDTO;
 import it.unikey.testfinale.BLL.mapper.dto.response.DocenteResponseDTO;
 import it.unikey.testfinale.BLL.service.abstraction.DocenteService;
 import lombok.RequiredArgsConstructor;
@@ -13,7 +12,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.EntityNotFoundException;
-import java.util.List;
 
 @RestController
 @RequiredArgsConstructor

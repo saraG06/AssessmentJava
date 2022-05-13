@@ -8,7 +8,6 @@ import it.unikey.testfinale.BLL.mapper.implementation.response.AcademyResponseMa
 import it.unikey.testfinale.BLL.mapper.implementation.response.DiscenteResponseMapper;
 import it.unikey.testfinale.BLL.service.abstraction.DiscenteService;
 import it.unikey.testfinale.DAL.Entity.Discente;
-import it.unikey.testfinale.DAL.Repository.AcademyRepository;
 import it.unikey.testfinale.DAL.Repository.DiscenteRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

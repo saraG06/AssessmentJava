@@ -1,7 +1,5 @@
 package it.unikey.testfinale.BLL.mapper.dto.response;
 
-import it.unikey.testfinale.BLL.mapper.dto.request.DiscenteRequestDTO;
-import it.unikey.testfinale.BLL.mapper.dto.request.ModuloRequestDTO;
 import lombok.Data;
 
 import java.time.LocalDate;

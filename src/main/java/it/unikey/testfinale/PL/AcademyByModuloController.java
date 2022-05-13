@@ -6,7 +6,6 @@ import io.swagger.annotations.ApiResponses;
 import it.unikey.testfinale.BLL.mapper.dto.request.ModuloRequestDTO;
 import it.unikey.testfinale.BLL.mapper.dto.response.AcademyResponseDTO;
 import it.unikey.testfinale.BLL.service.abstraction.AcademyService;
-import it.unikey.testfinale.DAL.Entity.Modulo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

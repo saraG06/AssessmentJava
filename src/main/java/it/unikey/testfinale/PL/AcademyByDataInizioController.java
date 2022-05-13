@@ -3,7 +3,6 @@ package it.unikey.testfinale.PL;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
-import it.unikey.testfinale.BLL.mapper.dto.request.ModuloRequestDTO;
 import it.unikey.testfinale.BLL.mapper.dto.response.AcademyResponseDTO;
 import it.unikey.testfinale.BLL.service.abstraction.AcademyService;
 import lombok.RequiredArgsConstructor;
