@@ -14,7 +14,4 @@ public interface AcademyRepository extends JpaRepository<Academy, Long> {
 
     @Query("SELECT a FROM Academy a WHERE a.nome=:nome")
     Academy getAcademyByNome(@Param("nome") String nome);
-
-    @Query("SELECT a FROM Academy a JOIN a.dataInizio, a.dataFine, a.nome")
-    Academy getInfoAcademy();
 }
