@@ -18,7 +18,7 @@ public class ModuloControllerCreazione {
 
 
     @PostMapping
-    @ApiOperation(value = "Inserimento di un Modulo con relazioni già esistenti nel DB")
+    @ApiOperation(value = "Inserimento di un Modulo con relazioni già esistenti nel DB",notes = "NON FUNZIONA!")
     public ResponseEntity<Void> save(@RequestBody ModuloRequestDTOCreazione moduloRequestDTOCreazione){
         try {
             moduloService.saveModuloCreazione(moduloRequestDTOCreazione);
