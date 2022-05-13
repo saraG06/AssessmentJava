@@ -23,7 +23,6 @@ public class AcademyResponseDTO {
     @JsonSerialize(using = LocalDateSerializer.class)
     private LocalDate dataFine;
 
-    private List<DocenteResponseDTO> docenteResponseDTOList;
     private List<DiscenteResponseDTO> discenteResponseDTOList;
     private List<ModuloResponseDTO> moduloResponseDTOList;
 }

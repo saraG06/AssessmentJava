@@ -21,7 +21,7 @@ public class AcademyRequestDTO {
     @JsonSerialize(using = LocalDateSerializer.class)
     private LocalDate dataFine;
 
-    private List<DocenteRequestDTO> docenteRequestDTOList;
+    private String docente;
     private List<DiscenteRequestDTO> discenteRequestDTOList;
     private List<ModuloRequestDTO> moduloRequestDTOList;
 }

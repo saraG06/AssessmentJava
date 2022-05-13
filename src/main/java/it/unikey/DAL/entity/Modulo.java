@@ -28,9 +28,6 @@ public class Modulo implements Serializable {
     @Column(name = "dataFine")
     private LocalDate dataFine;
 
-    @OneToMany(mappedBy = "modulo", cascade = CascadeType.ALL)
-    private List<Docente> docente;
-
     @ManyToOne(cascade = CascadeType.ALL)
     private Academy academy;
 }

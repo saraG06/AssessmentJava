@@ -11,4 +11,5 @@ public interface AcademyService {
     AcademyResponseDTO findById(Long id) throws IdNotFoundException;
     void deleteAcademy(Long id) throws IdNotFoundException;
     List<AcademyResponseDTO> findAllAcademy();
+    List<AcademyResponseDTO> findByNome(String nome);
 }
