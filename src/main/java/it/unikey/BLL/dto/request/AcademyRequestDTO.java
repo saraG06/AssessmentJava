@@ -24,4 +24,5 @@ public class AcademyRequestDTO {
 
     private List<DocenteRequestDTO> docenteRequestDTOList;
     private List<DiscenteRequestDTO> discenteRequestDTOList;
+    private List<ModuloRequestDTO> moduloRequestDTOList;
 }

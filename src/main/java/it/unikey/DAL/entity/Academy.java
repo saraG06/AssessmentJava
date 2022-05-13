@@ -29,4 +29,7 @@ public class Academy implements Serializable {
 
     @OneToMany(mappedBy = "academy", cascade = CascadeType.ALL)
     private List<Discente> discenteList;
+
+    @OneToMany(mappedBy = "academy", cascade = CascadeType.ALL)
+    private List<Docente> docenteList;
 }
