@@ -19,5 +19,4 @@ public class ModuloRequestDTO {
 
     private AcademyRequestDTO academyRequestDTO;
 
-
 }

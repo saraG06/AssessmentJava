@@ -1,5 +1,6 @@
 package it.unikey.assessmentjavaleonardopaolini.PL;
 
+import io.swagger.annotations.ApiOperation;
 import it.unikey.assessmentjavaleonardopaolini.BLL.dto.request.AcademyRequestDTO;
 import it.unikey.assessmentjavaleonardopaolini.BLL.dto.response.AcademyResponseDTO;
 import it.unikey.assessmentjavaleonardopaolini.BLL.service.abstraction.AcademyService;
@@ -20,6 +21,7 @@ public class AcademyController {
 
 
     @PostMapping
+    @ApiOperation(value = "Inserimento di un'Academy")
     public ResponseEntity<Void> save(@RequestBody AcademyRequestDTO academyRequestDTO){
         try {
             academyService.saveAcademy(academyRequestDTO);
@@ -30,11 +32,13 @@ public class AcademyController {
     }
 
     @GetMapping(path="/{nome}")
+    @ApiOperation(value = "Get dell'academy con il nome specificato")
     public ResponseEntity<AcademyResponseDTO>  getByNome(@PathVariable String nome){
         return new ResponseEntity<>(academyService.findAcademyPerNome(nome),HttpStatus.OK);
     }
 
     @GetMapping
+    @ApiOperation(value = "Get di tutte le Academy presenti nel DB")
     public ResponseEntity<List<AcademyResponseDTO>>  getAllAcademy(){
         return new ResponseEntity<>(academyService.findAllAcademy(),HttpStatus.OK);
     }

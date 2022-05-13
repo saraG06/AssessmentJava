@@ -1,7 +1,10 @@
 package it.unikey.assessmentjavaleonardopaolini.BLL.dto.response;
 
+import lombok.Data;
+
 import java.time.LocalDate;
 
+@Data
 public class ModuloResponseDTO {
 
     private Long id;
@@ -10,7 +13,7 @@ public class ModuloResponseDTO {
 
     private String argomento;
 
-    private LocalDate datainzio;
+    private LocalDate datainizio;
 
     private LocalDate datafine;
 

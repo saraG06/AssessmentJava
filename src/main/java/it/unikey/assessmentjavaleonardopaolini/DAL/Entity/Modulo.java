@@ -18,7 +18,7 @@ public class Modulo {
     private String argomento;
 
     @Column(name = "datainizio",nullable = false)
-    private LocalDate datainzio;
+    private LocalDate datainizio;
 
     @Column(name = "datafine",nullable = false)
     private LocalDate datafine;
@@ -55,12 +55,12 @@ public class Modulo {
         this.argomento = argomento;
     }
 
-    public LocalDate getDatainzio() {
-        return datainzio;
+    public LocalDate getDatainizio() {
+        return datainizio;
     }
 
-    public void setDatainzio(LocalDate datainzio) {
-        this.datainzio = datainzio;
+    public void setDatainizio(LocalDate datainizio) {
+        this.datainizio = datainizio;
     }
 
     public LocalDate getDatafine() {
@@ -93,7 +93,7 @@ public class Modulo {
                 "id=" + id +
                 ", nome='" + nome + '\'' +
                 ", argomento='" + argomento + '\'' +
-                ", datainzio=" + datainzio +
+                ", datainizio=" + datainizio +
                 ", datafine=" + datafine +
                 ", docente=" + docente +
                 ", academy=" + academy +

@@ -1,6 +1,7 @@
 package it.unikey.assessmentjavaleonardopaolini.BLL.service.implementation;
 
 import it.unikey.assessmentjavaleonardopaolini.BLL.dto.request.ModuloRequestDTO;
+import it.unikey.assessmentjavaleonardopaolini.BLL.dto.response.ModuloResponseDTO;
 import it.unikey.assessmentjavaleonardopaolini.BLL.mapper.implementation.request.AcademyRequestMapper;
 import it.unikey.assessmentjavaleonardopaolini.BLL.mapper.implementation.request.DocenteRequestMapper;
 import it.unikey.assessmentjavaleonardopaolini.BLL.mapper.implementation.request.ModuloRequestMapper;
@@ -14,6 +15,8 @@ import it.unikey.assessmentjavaleonardopaolini.DAL.Entity.Modulo;
 import it.unikey.assessmentjavaleonardopaolini.DAL.Repository.ModuloRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -37,5 +40,21 @@ public class ModuloServiceImplementation implements ModuloService {
         m.setDocente(d);
         m.setAcademy(a);
         moduloRepository.save(m);
+    }
+
+    @Override
+    public List<ModuloResponseDTO> findAllModulo() {
+
+        List<Modulo> lista = moduloRepository.findAll();
+        List<ModuloResponseDTO> listDTO = moduloResponseMapper.asDTOList(lista);
+        for(ModuloResponseDTO m : listDTO){
+            for(Modulo mo : lista){
+                m.setDocenteResponseDTO(docenteResponseMapper.asDTO(mo.getDocente()));
+                m.setAcademyResponseDTO(academyResponseMapper.asDTO(mo.getAcademy()));
+            }
+        }
+
+        return listDTO;
+
     }
 }
